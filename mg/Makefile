@@ -39,7 +39,7 @@ define Build/Compile
 		LDFLAGS="$(TARGET_LDFLAGS) -lncurses" \
 		CFLAGS="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) \
 		-D_GNU_SOURCE -D__dead='__attribute__((__noreturn__))' \
-		-Dst_mtimespec=st_mtim" \
+		-Dst_mtimespec=st_mtim -DREGEX -DNO_THEO" \
 		CC="$(TARGET_CC)"
 endef
 
