@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mg
 PKG_VERSION:=20160103
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://devio.us/~bcallah/mg
@@ -38,7 +38,8 @@ define Build/Compile
 	$(MAKE) -C $(PKG_BUILD_DIR) \
 		LDFLAGS="$(TARGET_LDFLAGS) -lncurses" \
 		CFLAGS="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) \
-			-D_GNU_SOURCE -D__dead='__attribute__((__noreturn__))'" \
+		-D_GNU_SOURCE -D__dead='__attribute__((__noreturn__))' \
+		-Dst_mtimespec=st_mtim" \
 		CC="$(TARGET_CC)"
 endef
 

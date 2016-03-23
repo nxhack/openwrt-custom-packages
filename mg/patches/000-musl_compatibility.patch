@@ -1,12 +1,15 @@
 --- a/fileio.c
 +++ b/fileio.c
-@@ -23,6 +23,10 @@
+@@ -23,6 +23,13 @@
  #include <string.h>
  #include <unistd.h>
  
-+#define st_mtimespec st_mtim
++#ifndef DEFFILEMODE
 +#define DEFFILEMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)
++#endif
++#ifndef MAXNAMLEN
 +#define MAXNAMLEN 255
++#endif
 +
  #include "def.h"
  #include "kbd.h"
