@@ -36,7 +36,8 @@ endef
 
 define Build/Compile
 	$(MAKE) -C $(PKG_BUILD_DIR) \
-		LDFLAGS="$(TARGET_LDFLAGS) -lncurses" \
+		LDFLAGS="$(TARGET_LDFLAGS)" \
+		LIBS="-lncurses -ltinfo" \
 		CFLAGS="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) \
 		-D_GNU_SOURCE -D__dead='__attribute__((__noreturn__))' \
 		-Dst_mtimespec=st_mtim -DNO_THEO" \
