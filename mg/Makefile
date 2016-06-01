@@ -15,6 +15,9 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://devio.us/~bcallah/mg
 PKG_MD5SUM:=3fb248f78b08a7395b87b1b6e940dc7c
 
+PKG_LICENSE:=ISC BSD
+PKG_LICENSE_FILES:=
+
 include $(INCLUDE_DIR)/package.mk
 
 define Package/mg
