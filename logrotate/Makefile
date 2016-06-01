@@ -19,6 +19,9 @@ PKG_SOURCE_URL:= \
     http://ftp.us.debian.org/debian/pool/main/l/logrotate
 PKG_MD5SUM:=4492b145b6d542e4a2f41e77fa199ab0
 
+PKG_LICENSE:=GPL+
+PKG_LICENSE_FILES:=COPYING
+
 include $(INCLUDE_DIR)/package.mk
 
 define Package/logrotate
@@ -40,8 +43,8 @@ define Package/logrotate/conffiles
 /etc/logrotate.conf
 endef
 
-EXTRA_CFLAGS += $(TARGET_CPPFLAGS)
-EXTRA_LDFLAGS += $(TARGET_LDFLAGS)
+EXTRA_CFLAGS+=$(TARGET_CPPFLAGS)
+EXTRA_LDFLAGS+=$(TARGET_LDFLAGS)
 
 define Build/Compile
 	$(call Build/Compile/Default, \
