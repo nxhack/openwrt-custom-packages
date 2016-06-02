@@ -19,6 +19,7 @@ PKG_SOURCE_URL:= \
     http://ftp.us.debian.org/debian/pool/main/l/logrotate
 PKG_MD5SUM:=4492b145b6d542e4a2f41e77fa199ab0
 
+PKG_MAINTAINER:=
 PKG_LICENSE:=GPL+
 PKG_LICENSE_FILES:=COPYING
 
