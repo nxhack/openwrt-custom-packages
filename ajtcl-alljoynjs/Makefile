@@ -44,7 +44,7 @@ define Package/ajtcl-alljoynjs/description
 endef
 
 define Package/ajtcl-alljoynjs-samples
-$(call Package/ajtcl-alljoynjs
+$(call Package/ajtcl-alljoynjs)
   TITLE+=- testing samples
   DEPENDS:=ajtcl-alljoynjs
   MENU:=0
