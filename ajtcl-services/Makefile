@@ -67,7 +67,7 @@ else
 endif
 
 define Build/Configure/Default
-# Override default to do nothing
+	# Override default to do nothing
 endef
 
 TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/include/ajtcl
