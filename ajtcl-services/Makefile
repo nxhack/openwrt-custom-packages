@@ -33,7 +33,7 @@ include $(INCLUDE_DIR)/scons.mk
 define Package/$(PKG_NAME)/Default
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=+ajtcl
+  DEPENDS:=ajtcl
   TITLE:=AllJoyn Thin Client Base Services library
   URL:=http://www.allseenalliance.org
   MAINTAINER:=AllSeen Alliance <allseen-core@lists.allseenalliance.org>
@@ -54,7 +54,7 @@ endef
 #define Package/$(PKG_NAME)-samples
 #$(call Package/$(PKG_NAME)/Default)
 #  TITLE:=AllJoyn Thin Client - Base Services - testing samples
-#  DEPENDS:=+ajtcl
+#  DEPENDS:=ajtcl
 #endef
 
 #define Package/$(PKG_NAME)-samples/description
