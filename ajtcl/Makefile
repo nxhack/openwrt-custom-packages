@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ajtcl
-PKG_VERSION:=16.04
+PKG_VERSION:=15.04b
 PKG_RELEASE:=1
 
 PKG_SOURCE:=ajtcl-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://git.allseenalliance.org/cgit/core/ajtcl.git/snapshot/
-PKG_MD5SUM:=fa36257188701d0698065e5db9ca67ff
+PKG_MD5SUM:=44c61bff40b4114077ffa04d49c820c6
 
 # SCons supports parallel builds but does not support make's jobserver
 PKG_BUILD_PARALLEL:=$(if $(CONFIG_PKG_BUILD_USE_JOBSERVER),0,1)
