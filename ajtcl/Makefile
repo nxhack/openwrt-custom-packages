@@ -63,10 +63,6 @@ else
   ALLJOYN_BUILD_VARIANT:=release
 endif
 
-define Build/Configure/Default
-	# Override default to do nothing
-endef
-
 define Build/Compile
 	CROSS_CFLAGS="$(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(FPIC) $(TARGET_CPPFLAGS) -DOPENWRT_MIPS" \
 	CROSS_LINKFLAGS="$(TARGET_LINKFLAGS) $(TARGET_LDFLAGS)" \
