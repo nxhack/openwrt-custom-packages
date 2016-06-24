@@ -70,8 +70,6 @@ define Build/Configure/Default
 	# Override default to do nothing
 endef
 
-TARGET_CFLAGS+=-std=gnu89
-
 define Build/Compile
 	$(SCONS_VARS) \
 	CROSS_CFLAGS="$(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(FPIC) $(TARGET_CPPFLAGS) $(EXTRA_CPPFLAGS)" \

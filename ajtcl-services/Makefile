@@ -71,7 +71,7 @@ define Build/Configure/Default
 	# Override default to do nothing
 endef
 
-TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/include/ajtcl -std=gnu89
+TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/include/ajtcl
 
 define Build/Compile
 	$(SCONS_VARS) \
