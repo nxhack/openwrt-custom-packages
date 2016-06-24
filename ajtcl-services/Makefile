@@ -75,17 +75,9 @@ TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/include/ajtcl
 
 define Build/Compile
 	$(SCONS_VARS) \
-	CROSS_CFLAGS="$(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(FPIC) $(TARGET_CPPFLAGS) $(EXTRA_CPPFLAGS)" \
-	CROSS_LINKFLAGS="$(TARGET_LINKFLAGS) $(TARGET_LDFLAGS)" \
-	CROSS_PATH=$(TARGET_PATH) \
-	CROSS_PREFIX=$(TARGET_CC:gcc=) \
 	scons -C $(PKG_BUILD_DIR) \
 		-f SConstruct.openwrt \
 		$(PKG_JOBS) \
-		BR=off \
-		ICE=off \
-		POLICYDB=on \
-		WS=off \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef
 
