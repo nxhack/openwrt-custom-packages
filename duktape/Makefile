@@ -46,6 +46,8 @@ define Build/Prepare
 	mv $(PKG_BUILD_DIR)/Makefile.cmdline $(PKG_BUILD_DIR)/Makefile
 endef
 
+TARGET_CFLAGS+=-I./src -DDUK_OPT_SELF_TESTS
+
 define Build/Compile
 	$(MAKE_VARS) \
 	$(MAKE_FLAGS) \
