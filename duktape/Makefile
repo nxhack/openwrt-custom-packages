@@ -18,6 +18,10 @@ PKG_MD5SUM:=6fa1783b2eddaab4ab815cd894624fba
 PKG_FILE:="$(STAGING_DIR)/pkginfo/libc.provides"
 PKG_CAT=`cat $(PKG_FILE) | grep libm.so.6`
 
+PKG_MAINTAINER:=
+PKG_LICENSE:=MIT
+PKG_LICENSE_FILES:=LICENSE.txt
+
 include $(INCLUDE_DIR)/package.mk
 
 define Package/duktape
