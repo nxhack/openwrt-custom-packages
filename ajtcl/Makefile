@@ -53,7 +53,7 @@ endef
 define Package/ajtcl-samples
 $(call Package/ajtcl/Default)
   TITLE:=AllJoyn Thin Client Library - testing samples
-  DEPENDS:=ajtcl
+  DEPENDS:=+ajtcl
 endef
 
 define Package/ajtcl-samples/description
