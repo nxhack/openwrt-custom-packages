@@ -28,6 +28,7 @@ PKG_LICENSE:=Custom
 PKG_LICENSE_FILES:=
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/scons.mk
 
 define Package/$(PKG_NAME)/Default
   SECTION:=net
@@ -73,6 +74,7 @@ endef
 TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/include/ajtcl
 
 define Build/Compile
+	$(SCONS_VARS) \
 	CROSS_CFLAGS="$(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(FPIC) $(TARGET_CPPFLAGS) $(EXTRA_CPPFLAGS)" \
 	CROSS_LINKFLAGS="$(TARGET_LINKFLAGS) $(TARGET_LDFLAGS)" \
 	CROSS_PATH=$(TARGET_PATH) \
