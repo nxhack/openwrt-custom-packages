@@ -47,8 +47,8 @@ define Build/Prepare
 endef
 
 define Build/Compile
-	CC=$(TARGET_CC) \
-	CXX=$(TARGET_CXX) \
+	$(MAKE_VARS) \
+	$(MAKE_FLAGS) \
 	$(MAKE) -C $(PKG_BUILD_DIR) DESTDIR="$(PKG_INSTALL_DIR)"
 endef
 
@@ -66,5 +66,4 @@ define Package/duktape/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/duk $(1)/usr/bin/
 endef
 
-$(eval $(call HostBuild))
 $(eval $(call BuildPackage,duktape))
