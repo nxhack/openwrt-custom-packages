@@ -40,6 +40,7 @@ define Package/duktape/description
 endef
 
 define Build/Prepare
+	(if [ ! $(PKG_CAT) ];then echo "libm.so.6" >> $(PKG_FILE); fi)
 	/bin/tar xf $(DL_DIR)/$(PKG_SOURCE) -C $(PKG_BUILD_DIR) --strip-components=1
 	$(Build/Patch)
 	mv $(PKG_BUILD_DIR)/Makefile.cmdline $(PKG_BUILD_DIR)/Makefile
