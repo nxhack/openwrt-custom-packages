@@ -1,24 +1,11 @@
 --- a/Makefile.cmdline
 +++ b/Makefile.cmdline
-@@ -8,9 +8,9 @@
+@@ -8,7 +8,7 @@
  DUKTAPE_CMDLINE_SOURCES = \
  	examples/cmdline/duk_cmdline.c
  
 -CC	= gcc
--CCOPTS	= -Os -pedantic -std=c99 -Wall -fstrict-aliasing -fomit-frame-pointer
--CCOPTS += -I./src   # duktape.h and duk_config.h must be in include path
 +#CC	= gcc
-+#CCOPTS	= -Os -pedantic -std=c99 -Wall -fstrict-aliasing -fomit-frame-pointer
-+#CCOPTS += -I./src   # duktape.h and duk_config.h must be in include path
+ CCOPTS	= -Os -pedantic -std=c99 -Wall -fstrict-aliasing -fomit-frame-pointer
+ CCOPTS += -I./src   # duktape.h and duk_config.h must be in include path
  CCLIBS	= -lm
- 
- # If you want linenoise, you can enable these.  At the moment linenoise
-@@ -21,7 +21,7 @@
- #duk:	linenoise
- 
- # Optional feature defines, see: http://duktape.org/guide.html#compiling
--CCOPTS += -DDUK_OPT_SELF_TESTS
-+#CCOPTS += -DDUK_OPT_SELF_TESTS
- #CCOPTS += -DDUK_OPT_DEBUG
- #CCOPTS += -DDUK_OPT_DPRINT
- # ...

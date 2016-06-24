@@ -41,16 +41,14 @@ endef
 
 define Build/Prepare
 	(if [ ! $(PKG_CAT) ];then echo "libm.so.6" >> $(PKG_FILE); fi)
-	/bin/tar xvf $(DL_DIR)/$(PKG_SOURCE) -C $(PKG_BUILD_DIR) --strip-components=1
+	/bin/tar xzf $(DL_DIR)/$(PKG_SOURCE) -C $(PKG_BUILD_DIR) --strip-components=1
 	$(Build/Patch)
 	mv $(PKG_BUILD_DIR)/Makefile.cmdline $(PKG_BUILD_DIR)/Makefile
 endef
 
-TARGET_CFLAGS+=-I./src -DDUK_OPT_SELF_TESTS
-
 define Build/Compile
-	$(MAKE_VARS) \
-	$(MAKE_FLAGS) \
+	CC=$(TARGET_CC) \
+	CXX=$(TARGET_CXX) \
 	$(MAKE) -C $(PKG_BUILD_DIR) DESTDIR="$(PKG_INSTALL_DIR)"
 endef
 
