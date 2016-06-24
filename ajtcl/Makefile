@@ -15,8 +15,6 @@ PKG_SOURCE:=ajtcl-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://git.allseenalliance.org/cgit/core/ajtcl.git/snapshot/
 PKG_MD5SUM:=fa36257188701d0698065e5db9ca67ff
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/ajtcl-$(PKG_VERSION)
-
 # SCons supports parallel builds but does not support make's jobserver
 PKG_BUILD_PARALLEL:=$(if $(CONFIG_PKG_BUILD_USE_JOBSERVER),0,1)
 
@@ -87,13 +85,13 @@ define Build/InstallDev
 	$(CP) $(PKG_BUILD_DIR)/inc/*.h $(1)/usr/include/ajtcl/
 	$(CP) $(PKG_BUILD_DIR)/target/linux/*.h $(1)/usr/include/ajtcl/
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/libajtcl_st.a $(1)/usr/lib/
-	$(CP) $(PKG_BUILD_DIR)/libajtcl.so $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/build/release/src/libajtcl_st.a $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/build/release/src/libajtcl.so $(1)/usr/lib/
 endef
 
 define Package/ajtcl/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/libajtcl.so $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/build/release/src/libajtcl.so $(1)/usr/lib/
 endef
 
 define Package/ajtcl-samples/install
