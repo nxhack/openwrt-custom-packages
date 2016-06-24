@@ -89,6 +89,10 @@ define Build/Compile
 	scons -C $(PKG_BUILD_DIR) \
 		-f SConstruct.openwrt \
 		$(PKG_JOBS) \
+		WS=off \
+		BR=off \
+		BT=off \
+		ICE=off \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef
 
