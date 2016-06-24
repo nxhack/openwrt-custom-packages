@@ -15,6 +15,8 @@ PKG_SOURCE:=ajtcl-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://git.allseenalliance.org/cgit/core/ajtcl.git/snapshot/
 PKG_MD5SUM:=fa36257188701d0698065e5db9ca67ff
 
+PKG_BUILD_DIR:=$(BUILD_DIR)/ajtcl-$(PKG_VERSION)
+
 # SCons supports parallel builds but does not support make's jobserver
 PKG_BUILD_PARALLEL:=$(if $(CONFIG_PKG_BUILD_USE_JOBSERVER),0,1)
 
@@ -63,12 +65,16 @@ else
   ALLJOYN_BUILD_VARIANT:=release
 endif
 
+define Build/Configure/Default
+	# Override default to do nothing
+endef
+
 define Build/Compile
 	CROSS_CFLAGS="$(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(FPIC) $(TARGET_CPPFLAGS) -DOPENWRT_MIPS" \
 	CROSS_LINKFLAGS="$(TARGET_LINKFLAGS) $(TARGET_LDFLAGS)" \
 	CROSS_PATH=$(TARGET_PATH) \
 	CROSS_PREFIX=$(TARGET_CC:gcc=) \
-	scons -C $(PKG_INSTALL_DIR) \
+	scons -C $(PKG_BUILD_DIR) \
 		$(PKG_JOBS) \
 		WS=off \
 		TARG=linux \
@@ -78,37 +84,37 @@ endef
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
 	$(INSTALL_DIR) $(1)/usr/include/ajtcl
-	$(CP) $(PKG_INSTALL_DIR)/inc/*.h $(1)/usr/include/ajtcl/
-	$(CP) $(PKG_INSTALL_DIR)/target/linux/*.h $(1)/usr/include/ajtcl/
+	$(CP) $(PKG_BUILD_DIR)/inc/*.h $(1)/usr/include/ajtcl/
+	$(CP) $(PKG_BUILD_DIR)/target/linux/*.h $(1)/usr/include/ajtcl/
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/libajtcl_st.a $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/libajtcl.so $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/libajtcl_st.a $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/libajtcl.so $(1)/usr/lib/
 endef
 
 define Package/ajtcl/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/libajtcl.so $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/libajtcl.so $(1)/usr/lib/
 endef
 
 define Package/ajtcl-samples/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/samples/secure/SecureClient $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/samples/secure/SecureService $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/samples/basic/basic_service $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/samples/basic/basic_client $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/samples/basic/signal_service $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/samples/basic/nameChange_client $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/samples/basic/signalConsumer_client $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/test/mutter $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/test/ajlite $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/test/aestest $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/test/aesbench $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/test/svclite $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/test/clientlite $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/test/siglite $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/test/sessions $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/test/nvramtest $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/test/bastress2 $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/secure/SecureClient $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/secure/SecureService $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/basic/basic_service $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/basic/basic_client $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/basic/signal_service $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/basic/nameChange_client $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/basic/signalConsumer_client $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/mutter $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/ajlite $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/aestest $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/aesbench $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/svclite $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/clientlite $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/siglite $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/sessions $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/nvramtest $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/bastress2 $(1)/usr/bin/
 endef
 
 $(eval $(call BuildPackage,ajtcl))
