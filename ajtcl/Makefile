@@ -32,7 +32,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/ajtcl/Default
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=+libopenssl +libpthread +librt
+  DEPENDS:=+libopenssl +libpthread +librt +ajtcl
   URL:=http://www.allseenalliance.org
   TITLE:=The AllJoyn Thin Client Library
   MAINTAINER:=AllSeen Alliance <allseen-core@lists.allseenalliance.org>
