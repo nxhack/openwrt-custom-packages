@@ -79,6 +79,7 @@ define Build/Compile
 	CROSS_LINKFLAGS="$(TARGET_LINKFLAGS) $(TARGET_LDFLAGS)" \
 	CROSS_PATH=$(TARGET_PATH) \
 	CROSS_PREFIX=$(TARGET_CC:gcc=) \
+	TARGET_PATH="$(TARGET_PATH):$(PATH)" \
 	scons -C $(PKG_BUILD_DIR) \
 		-f SConstruct.openwrt \
 		prefix=/usr \
@@ -88,16 +89,6 @@ define Build/Compile
 		BR=off \
 		BT=off \
 		ICE=off \
-		"TARGET_CC=$$(TARGET_CC)" \
-		"TARGET_CXX=$$(TARGET_CXX)" \
-		"TARGET_CFLAGS=$$(TARGET_CFLAGS)" \
-		"TARGET_CPPFLAGS=$$(TARGET_CPPFLAGS)" \
-		"TARGET_PATH=$$(TARGET_PATH)" \
-		"TARGET_LINKFLAGS=$$(TARGET_LDFLAGS)" \
-		"TARGET_LINK=$$(TARGET_CC)" \
-		"TARGET_AR=$$(TARGET_AR)" \
-		"TARGET_RANLIB=$$(TARGET_RANLIB)" \
-		"STAGING_DIR=$$(STAGING_DIR)" \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef
 
