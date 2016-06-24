@@ -91,7 +91,7 @@ endef
 
 define Package/ajtcl/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/dist/lib/* $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/dist/lib/libajtcl.so $(1)/usr/lib/
 endef
 
 define Package/ajtcl-samples/install

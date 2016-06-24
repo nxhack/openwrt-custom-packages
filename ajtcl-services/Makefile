@@ -87,35 +87,14 @@ endef
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
 	$(INSTALL_DIR) $(1)/usr/include/ajtcl
-	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn
-
-	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/config
-	$(CP) $(PKG_BUILD_DIR)/config/inc/alljoyn/config/*.h $(1)/usr/include/ajtcl/alljoyn/config
-
-	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/controlpanel
-	$(CP) $(PKG_BUILD_DIR)/controlpanel/inc/alljoyn/controlpanel/*.h $(1)/usr/include/ajtcl/alljoyn/controlpanel
-	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/controlpanel/Common
-	$(CP) $(PKG_BUILD_DIR)/controlpanel/inc/alljoyn/controlpanel/Common/*.h $(1)/usr/include/ajtcl/alljoyn/controlpanel/Common
-	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/controlpanel/Widgets
-	$(CP) $(PKG_BUILD_DIR)/controlpanel/inc/alljoyn/controlpanel/Widgets/*.h $(1)/usr/include/ajtcl/alljoyn/controlpanel/Widgets
-
-	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/notification
-	$(CP) $(PKG_BUILD_DIR)/notification/inc/alljoyn/notification/*.h $(1)/usr/include/ajtcl/alljoyn/notification
-
-	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/onboarding
-	$(CP) $(PKG_BUILD_DIR)/onboarding/inc/alljoyn/onboarding/*.h $(1)/usr/include/ajtcl/alljoyn/onboarding
-
-	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/services_common
-	$(CP) $(PKG_BUILD_DIR)/services_common/inc/alljoyn/services_common/*.h $(1)/usr/include/ajtcl/alljoyn/services_common
-
+	$(CP) $(PKG_BUILD_DIR)/dist/include/ajtcl/* $(1)/usr/include/ajtcl
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/libajtcl_services.a $(1)/usr/lib/
-	$(CP) $(PKG_BUILD_DIR)/libajtcl_services.so $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/dist/lib/* $(1)/usr/lib/
 endef
 
 define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/libajtcl_services.so $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/dist/lib/libajtcl_services.so $(1)/usr/lib/
 endef
 
 #define Package/$(PKG_NAME)-samples/install
