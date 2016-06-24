@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ajtcl-services
-PKG_VERSION:=16.04
+PKG_VERSION:=15.04
 PKG_RELEASE:=1
 
 PKG_SOURCE:=base_tcl-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://git.allseenalliance.org/cgit/services/base_tcl.git/snapshot/
-PKG_MD5SUM:=3dfc63f9b256f5ed7b8d3a47d90f68b5
+PKG_MD5SUM:=8cf83d93511ed1dd21c285fe7a56865e
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/base_tcl-$(PKG_VERSION)
 
@@ -33,7 +33,7 @@ include $(INCLUDE_DIR)/scons.mk
 define Package/$(PKG_NAME)/Default
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=ajtcl
+  DEPENDS:=+ajtcl
   TITLE:=AllJoyn Thin Client Base Services library
   URL:=http://www.allseenalliance.org
   MAINTAINER:=AllSeen Alliance <allseen-core@lists.allseenalliance.org>
@@ -54,7 +54,7 @@ endef
 #define Package/$(PKG_NAME)-samples
 #$(call Package/$(PKG_NAME)/Default)
 #  TITLE:=AllJoyn Thin Client - Base Services - testing samples
-#  DEPENDS:=ajtcl
+#  DEPENDS:=+ajtcl
 #endef
 
 #define Package/$(PKG_NAME)-samples/description
@@ -80,8 +80,8 @@ define Build/Compile
 	CROSS_PATH=$(TARGET_PATH) \
 	CROSS_PREFIX=$(TARGET_CC:gcc=) \
 	scons -C $(PKG_BUILD_DIR) \
+		-f SConstruct.openwrt \
 		$(PKG_JOBS) \
-		TARG=linux \
 		BR=off \
 		ICE=off \
 		POLICYDB=on \
@@ -92,14 +92,35 @@ endef
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
 	$(INSTALL_DIR) $(1)/usr/include/ajtcl
-	$(CP) $(PKG_BUILD_DIR)/dist/include/ajtcl/* $(1)/usr/include/ajtcl
+	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn
+
+	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/config
+	$(CP) $(PKG_BUILD_DIR)/config/inc/alljoyn/config/*.h $(1)/usr/include/ajtcl/alljoyn/config
+
+	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/controlpanel
+	$(CP) $(PKG_BUILD_DIR)/controlpanel/inc/alljoyn/controlpanel/*.h $(1)/usr/include/ajtcl/alljoyn/controlpanel
+	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/controlpanel/Common
+	$(CP) $(PKG_BUILD_DIR)/controlpanel/inc/alljoyn/controlpanel/Common/*.h $(1)/usr/include/ajtcl/alljoyn/controlpanel/Common
+	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/controlpanel/Widgets
+	$(CP) $(PKG_BUILD_DIR)/controlpanel/inc/alljoyn/controlpanel/Widgets/*.h $(1)/usr/include/ajtcl/alljoyn/controlpanel/Widgets
+
+	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/notification
+	$(CP) $(PKG_BUILD_DIR)/notification/inc/alljoyn/notification/*.h $(1)/usr/include/ajtcl/alljoyn/notification
+
+	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/onboarding
+	$(CP) $(PKG_BUILD_DIR)/onboarding/inc/alljoyn/onboarding/*.h $(1)/usr/include/ajtcl/alljoyn/onboarding
+
+	$(INSTALL_DIR) $(1)/usr/include/ajtcl/alljoyn/services_common
+	$(CP) $(PKG_BUILD_DIR)/services_common/inc/alljoyn/services_common/*.h $(1)/usr/include/ajtcl/alljoyn/services_common
+
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/dist/lib/* $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/libajtcl_services.a $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/libajtcl_services.so $(1)/usr/lib/
 endef
 
 define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/dist/lib/libajtcl_services.so $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/libajtcl_services.so $(1)/usr/lib/
 endef
 
 #define Package/$(PKG_NAME)-samples/install
