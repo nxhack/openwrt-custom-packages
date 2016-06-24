@@ -78,8 +78,11 @@ define Build/Compile
 	CROSS_PREFIX=$(TARGET_CC:gcc=) \
 	scons -C $(PKG_BUILD_DIR) \
 		$(PKG_JOBS) \
-		WS=off \
 		TARG=linux \
+		BR=off \
+		ICE=off \
+		POLICYDB=on \
+		WS=off \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef
 

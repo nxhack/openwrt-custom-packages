@@ -28,6 +28,7 @@ PKG_LICENSE:=Custom
 PKG_LICENSE_FILES:=
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/scons.mk
 
 define Package/$(PKG_NAME)
   TITLE:=AllJoyn Thin Client - AllJoynJS
@@ -66,17 +67,24 @@ define Build/Configure/Default
 	# Override default to do nothing
 endef
 
+TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/src/duktape/src -I$(STAGING_DIR)/usr/include/ajtcl
+TARGET_LDFLAGS+=-lajtcl_services
+
 define Build/Compile
 	YUN_BUILD=0 \
-	CROSS_CFLAGS="-I$(STAGING_DIR)/usr/src/duktape/src -I$(STAGING_DIR)/usr/include/ajtcl $(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(TARGET_CPPFLAGS)" \
-	CROSS_LINKFLAGS="$(TARGET_LINKFLAGS) $(TARGET_LDFLAGS) -lajtcl_services" \
+	$(SCONS_VARS) \
+	CROSS_CFLAGS="$(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(FPIC) $(TARGET_CPPFLAGS) $(EXTRA_CPPFLAGS)" \
+	CROSS_LINKFLAGS="$(TARGET_LINKFLAGS) $(TARGET_LDFLAGS)" \
 	CROSS_PATH=$(TARGET_PATH) \
 	CROSS_PREFIX=$(REAL_GNU_TARGET_NAME)- \
 	DUKTAPE_DIST="$(STAGING_DIR)/usr/src/duktape" \
 	scons -C $(PKG_BUILD_DIR) \
 		$(PKG_JOBS) \
-		WS=off \
 		TARG=linux \
+		BR=off \
+		ICE=off \
+		POLICYDB=on \
+		WS=off \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef
 
