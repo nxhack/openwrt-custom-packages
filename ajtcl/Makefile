@@ -77,6 +77,8 @@ define Build/Compile
 	CROSS_PATH=$(TARGET_PATH) \
 	CROSS_PREFIX=$(TARGET_CC:gcc=) \
 	scons -C $(PKG_BUILD_DIR) \
+		prefix=/usr \
+		$(SCONS_OPTIONS) \
 		$(PKG_JOBS) \
 		TARG=linux \
 		BR=off \

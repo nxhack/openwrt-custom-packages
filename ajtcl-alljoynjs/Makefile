@@ -79,6 +79,8 @@ define Build/Compile
 	CROSS_PREFIX=$(REAL_GNU_TARGET_NAME)- \
 	DUKTAPE_DIST="$(STAGING_DIR)/usr/src/duktape" \
 	scons -C $(PKG_BUILD_DIR) \
+		prefix=/usr \
+		$(SCONS_OPTIONS) \
 		$(PKG_JOBS) \
 		TARG=linux \
 		BR=off \
