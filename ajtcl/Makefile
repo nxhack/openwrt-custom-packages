@@ -82,7 +82,6 @@ endef
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
 	$(INSTALL_DIR) $(1)/usr/include/ajtcl
-	$(INSTALL_DIR) $(1)/usr/include/ajtcl/services
 	$(CP) $(PKG_BUILD_DIR)/dist/include/ajtcl/* $(1)/usr/include/ajtcl/
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_BUILD_DIR)/dist/lib/* $(1)/usr/lib/
@@ -95,8 +94,7 @@ endef
 
 define Package/ajtcl-samples/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_DIR) $(1)/usr/bin/services
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/dist/bin/* $(1)/usr/bin/
+	$(CP) $(PKG_BUILD_DIR)/dist/bin/* $(1)/usr/bin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/dist/test/* $(1)/usr/bin/
 endef
 
