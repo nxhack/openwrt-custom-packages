@@ -82,37 +82,20 @@ endef
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
 	$(INSTALL_DIR) $(1)/usr/include/ajtcl
-	$(CP) $(PKG_BUILD_DIR)/inc/*.h $(1)/usr/include/ajtcl/
-	$(CP) $(PKG_BUILD_DIR)/target/linux/*.h $(1)/usr/include/ajtcl/
+	$(CP) $(PKG_BUILD_DIR)/dist/include/ajtcl/* $(1)/usr/include/ajtcl/
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/build/release/src/libajtcl_st.a $(1)/usr/lib/
-	$(CP) $(PKG_BUILD_DIR)/build/release/src/libajtcl.so $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/dist/lib/* $(1)/usr/lib/
 endef
 
 define Package/ajtcl/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/build/release/src/libajtcl.so $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/dist/lib/* $(1)/usr/lib/
 endef
 
 define Package/ajtcl-samples/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/secure/SecureClient $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/secure/SecureService $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/basic/basic_service $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/basic/basic_client $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/basic/signal_service $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/basic/nameChange_client $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/samples/basic/signalConsumer_client $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/mutter $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/ajlite $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/aestest $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/aesbench $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/svclite $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/clientlite $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/siglite $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/sessions $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/nvramtest $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/test/bastress2 $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/dist/bin/* $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/dist/test/* $(1)/usr/bin/
 endef
 
 $(eval $(call BuildPackage,ajtcl))
