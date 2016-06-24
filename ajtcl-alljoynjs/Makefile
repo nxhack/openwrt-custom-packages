@@ -15,8 +15,6 @@ PKG_SOURCE:=alljoyn-js-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://git.allseenalliance.org/cgit/core/alljoyn-js.git/snapshot/
 PKG_MD5SUM:=276767da532bf845ca014c7a5d8f7885
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/alljoyn-js-$(PKG_VERSION)
-
 # SCons supports parallel builds but does not support make's jobserver
 PKG_BUILD_PARALLEL:=$(if $(CONFIG_PKG_BUILD_USE_JOBSERVER),0,1)
 
@@ -29,7 +27,7 @@ PKG_LICENSE_FILES:=
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/$(PKG_NAME)
+define Package/ajtcl-alljoynjs
   TITLE:=AllJoyn Thin Client - AllJoynJS
   SECTION:=net
   CATEGORY:=Network
@@ -39,20 +37,20 @@ define Package/$(PKG_NAME)
   MENU:=1
 endef
 
-define Package/$(PKG_NAME)/description
+define Package/ajtcl-alljoynjs/description
 	AllJoyn Thin Client AllJoynJS binding is a basic, low-level JavaScript
 	interpreter that uses the Duktape embeddable JavaScript engine for developing
 	ad hoc peer-to-peer applications that use the AllJoyn protocol. MASTER Revision
 endef
 
-define Package/$(PKG_NAME)-samples
-$(call Package/$(PKG_NAME))
+define Package/ajtcl-alljoynjs-samples
+$(call Package/ajtcl-alljoynjs
   TITLE+=- testing samples
-  DEPENDS:=$(PKG_NAME)
+  DEPENDS:=ajtcl-alljoynjs
   MENU:=0
 endef
 
-define Package/$(PKG_NAME)-samples/description
+define Package/ajtcl-alljoynjs-samples/description
 	Sample JavaScript programs that use AllJoyn via alljoyn.js.
 endef
 
@@ -73,26 +71,25 @@ define Build/Compile
 	CROSS_PATH=$(TARGET_PATH) \
 	CROSS_PREFIX=$(REAL_GNU_TARGET_NAME)- \
 	DUKTAPE_DIST="$(STAGING_DIR)/usr/src/duktape" \
-	scons -C $(PKG_BUILD_DIR) \
+	scons -C $(PKG_INSTALL_DIR) \
 		$(PKG_JOBS) \
 		WS=off \
 		TARG=linux \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef
 
-define Package/$(PKG_NAME)/install
+define Package/ajtcl-alljoynjs/install
 	$(INSTALL_DIR) $(1)/usr
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(CP) $(PKG_BUILD_DIR)/alljoynjs $(1)/usr/bin/
+	$(CP) $(PKG_INSTALL_DIR)/alljoynjs $(1)/usr/bin/
 endef
 
-define Package/$(PKG_NAME)-samples/install
+define Package/ajtcl-alljoynjs-samples/install
 	$(INSTALL_DIR) $(1)/usr
 	$(INSTALL_DIR) $(1)/usr/share
 	$(INSTALL_DIR) $(1)/usr/share/alljoyn.js
-	$(CP) $(PKG_BUILD_DIR)/js/*.js $(1)/usr/share/alljoyn.js/
+	$(CP) $(PKG_INSTALL_DIR)/js/*.js $(1)/usr/share/alljoyn.js/
 endef
 
-$(eval $(call HostBuild))
-$(eval $(call BuildPackage,$(PKG_NAME)))
-$(eval $(call BuildPackage,$(PKG_NAME)-samples))
+$(eval $(call BuildPackage,ajtcl-alljoynjs))
+$(eval $(call BuildPackage,ajtcl-alljoynjs-samples))
