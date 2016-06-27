@@ -43,13 +43,12 @@ define Build/Prepare
 	(if [ ! $(PKG_CAT) ];then echo "libm.so.6" >> $(PKG_FILE); fi)
 	/bin/tar xf $(DL_DIR)/$(PKG_SOURCE) -C $(PKG_BUILD_DIR) --strip-components=1
 	$(Build/Patch)
-	mv $(PKG_BUILD_DIR)/Makefile.cmdline $(PKG_BUILD_DIR)/Makefile
 endef
 
 define Build/Compile
 	CC=$(TARGET_CC) \
 	CCOPTS="$(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(TARGET_LINKFLAGS) $(TARGET_LDFLAGS)" \
-	$(MAKE) -C $(PKG_BUILD_DIR) DESTDIR="$(PKG_INSTALL_DIR)"
+	$(MAKE) -f $(PKG_BUILD_DIR)/Makefile.cmdline -C $(PKG_BUILD_DIR) DESTDIR="$(PKG_INSTALL_DIR)"
 endef
 
 define Build/InstallDev
