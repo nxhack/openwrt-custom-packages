@@ -1,11 +1,13 @@
 --- a/Makefile.cmdline
 +++ b/Makefile.cmdline
-@@ -8,7 +8,7 @@
+@@ -8,8 +8,8 @@
  DUKTAPE_CMDLINE_SOURCES = \
  	examples/cmdline/duk_cmdline.c
  
 -CC	= gcc
+-CCOPTS	= -Os -pedantic -std=c99 -Wall -fstrict-aliasing -fomit-frame-pointer
 +#CC	= gcc
- CCOPTS	= -Os -pedantic -std=c99 -Wall -fstrict-aliasing -fomit-frame-pointer
++CCOPTS	= $(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(TARGET_CPPFLAGS) $(EXTRA_CPPFLAGS)
  CCOPTS += -I./src   # duktape.h and duk_config.h must be in include path
  CCLIBS	= -lm
+ 
