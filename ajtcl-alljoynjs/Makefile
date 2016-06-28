@@ -63,8 +63,7 @@ else
   ALLJOYN_BUILD_VARIANT:=release
 endif
 
-define Build/Configure/Default
-	# Override default to do nothing
+define Build/Configure
 endef
 
 TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/src/duktape/src -I$(STAGING_DIR)/usr/include/ajtcl

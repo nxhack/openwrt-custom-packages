@@ -36,9 +36,7 @@ define Package/duktape/description
 	library.
 endef
 
-define Build/Prepare
-	/bin/tar xf $(DL_DIR)/$(PKG_SOURCE) -C $(PKG_BUILD_DIR) --strip-components=1
-	$(Build/Patch)
+define Build/Configure
 endef
 
 define Build/Compile
