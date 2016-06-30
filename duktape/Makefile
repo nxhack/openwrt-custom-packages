@@ -22,18 +22,15 @@ PKG_LICENSE_FILES:=LICENSE.txt
 include $(INCLUDE_DIR)/package.mk
 
 define Package/duktape
-	DEPENDS:=+libstdcpp +libc +libpthread
-	SECTION:=lang
-	CATEGORY:=Languages
-	TITLE:=Duktape embeddable JavaScript interpreter
-	URL:=http://www.duktape.org
+  SECTION:=lang
+  CATEGORY:=Languages
+  DEPENDS:=+libstdcpp +libc +libpthread
+  TITLE:=Duktape embeddable JavaScript interpreter
+  URL:=http://www.duktape.org
 endef
 
 define Package/duktape/description
-	Duktape is a light-weight embeddable JavaScript interpreter.  It is provided as
-	a C source file that is to be compiled into other projects.  Because it is
-	highly configurable at compile-time, it is not suitable for being built as a
-	library.
+  Duktape is a light-weight embeddable JavaScript interpreter.  It is provided as a C source file that is to be compiled into other projects.  Because it is highly configurable at compile-time, it is not suitable for being built as a library.
 endef
 
 define Build/Configure
