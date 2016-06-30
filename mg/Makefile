@@ -38,6 +38,9 @@ define Package/mg/description
 	one Emacs flavor.
 endef
 
+define Build/Configure
+endef
+
 define Build/Compile
 	$(MAKE) -C $(PKG_BUILD_DIR) \
 		LDFLAGS="$(TARGET_LDFLAGS)" \
