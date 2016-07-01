@@ -56,7 +56,7 @@ define Build/Configure
 	TARGET_CFLAGS="$(TARGET_CFLAGS) -DIN_OPENWRT" \
 	TARGET_LDFLAGS="$(TARGET_LDFLAGS)" \
 	$(call Build/Configure/Default)
-endif
+endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(STAGING_DIR)/usr/include/azure-iot-sdks
