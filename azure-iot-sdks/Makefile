@@ -43,16 +43,20 @@ endef
 
 CMAKE_OPTIONS += \
 	-DIN_OPENWRT=1 \
-	TOOLCHAIN_DIR="$(TOOLCHAIN_DIR)" \
-	TARGET_CPPFLAGS="$(TARGET_CPPFLAGS)" \
-	TARGET_CFLAGS="$(TARGET_CFLAGS) -DIN_OPENWRT" \
-	TARGET_LDFLAGS="$(TARGET_LDFLAGS)" \
 	-Duse_amqp:bool=ON \
 	-Duse_http:bool=ON \
 	-Duse_mqtt:bool=OFF \
 	-Dskip_unittests:bool=ON \
 	-Duse_floats:bool=OFF \
 	-Duse_condition:bool=OFF
+
+define Build/Configure
+	TOOLCHAIN_DIR="$(TOOLCHAIN_DIR)" \
+	TARGET_CPPFLAGS="$(TARGET_CPPFLAGS)" \
+	TARGET_CFLAGS="$(TARGET_CFLAGS) -DIN_OPENWRT" \
+	TARGET_LDFLAGS="$(TARGET_LDFLAGS)" \
+	$(call Build/Configure/Default)
+endif
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(STAGING_DIR)/usr/include/azure-iot-sdks
