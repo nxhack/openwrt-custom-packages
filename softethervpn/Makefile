@@ -88,13 +88,19 @@ define Host/Prepare
 	/bin/tar xzf $(DL_DIR)/$(PKG_SOURCE) -C $(HOST_BUILD_DIR) --strip-components 1
 endef
 
+define Host/Configure
+endef
+
 define Host/Compile
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/Mayaqua \
-		$(HOST_MAKE_FLAGS)
+		$(HOST_MAKE_FLAGS) \
+		-f src/makefiles/linux_32bit.mak
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/Cedar \
-		$(HOST_MAKE_FLAGS)
+		$(HOST_MAKE_FLAGS) \
+		-f src/makefiles/linux_32bit.mak
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/hamcorebuilder \
-		$(HOST_MAKE_FLAGS)
+		$(HOST_MAKE_FLAGS) \
+		-f src/makefiles/linux_32bit.mak
 endef
 
 define Host/Install
