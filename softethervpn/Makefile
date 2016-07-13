@@ -45,15 +45,20 @@ define Package/softethervpn/conffiles
 	/usr/bin/vpn_server.config
 endef
 
+define Build/Prepare
+	/bin/tar xzf $(DL_DIR)/$(PKG_SOURCE) -C $(PKG_BUILD_DIR) --strip-components 1
+	$(Build/Patch)
+endef
+
+define Build/Configure
+endef
+
 ifeq ($(ARCH),mips)
 	SE4WRT_OPTIONS := -minterlink-mips16
 endif
 ifeq ($(ARCH),mipsel)
 	SE4WRT_OPTIONS := -minterlink-mips16
 endif
-
-define Build/Configure
-endef
 
 define Build/Compile
 	$(MAKE) \
