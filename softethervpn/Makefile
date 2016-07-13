@@ -56,6 +56,9 @@ endef
 define Build/Configure
 endef
 
+EXTRA_CPPFLAGS+=-I$(STAGING_DIR)/usr/include/readline/
+EXTRA_LDFLAGS+=-lncurses
+
 ifeq ($(ARCH),mips)
 	SE4WRT_OPTIONS := -minterlink-mips16
 endif
