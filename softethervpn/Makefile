@@ -14,7 +14,7 @@ PKG_VERSION2:=beta
 PKG_DATE:=2016.04.24
 PKG_RELEASE:=1
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/v$(PKG_VERSION)-$(PKG_RELEASE)
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-v$(PKG_VERSION)
 PKG_SOURCE:=softether-src-v$(PKG_VERSION)-$(PKG_VERSION2).tar.gz
 PKG_SOURCE_URL:=http://jp.softether-download.com/files/softether/v$(PKG_VERSION)-$(PKG_VERSION2)-$(PKG_DATE)-tree/Source_Code/
 PKG_MD5SUM:=928d882d5fc23e00f0a5fa4ebf292ab9
