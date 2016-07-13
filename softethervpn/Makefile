@@ -94,13 +94,13 @@ endef
 define Host/Compile
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/Mayaqua \
 		$(HOST_MAKE_FLAGS) \
-		-f src/makefiles/linux_32bit.mak
+		-f ../makefiles/linux_32bit.mak
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/Cedar \
 		$(HOST_MAKE_FLAGS) \
-		-f src/makefiles/linux_32bit.mak
+		-f ../makefiles/linux_32bit.mak
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/hamcorebuilder \
 		$(HOST_MAKE_FLAGS) \
-		-f src/makefiles/linux_32bit.mak
+		-f ../makefiles/linux_32bit.mak
 endef
 
 define Host/Install
