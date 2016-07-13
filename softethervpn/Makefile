@@ -30,7 +30,7 @@ define Package/softethervpn
   SECTION:=net
   CATEGORY:=Network
   SUBMENU:=VPN
-  DEPENDS:=+libopenssl +libpthread +librt
+  DEPENDS:=+libopenssl +libpthread +librt +libreadline
   URL:=http://www.softether.org/
   TITLE:=An Open-Source Free​Cross-platform Multi-protocol VPN Program
 endef
