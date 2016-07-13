@@ -92,15 +92,9 @@ define Host/Configure
 endef
 
 define Host/Compile
-	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/Mayaqua \
-		$(HOST_MAKE_FLAGS) \
-		-f ../makefiles/linux_32bit.mak
-	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/Cedar \
-		$(HOST_MAKE_FLAGS) \
-		-f ../makefiles/linux_32bit.mak
-	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/hamcorebuilder \
-		$(HOST_MAKE_FLAGS) \
-		-f ../makefiles/linux_32bit.mak
+	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR) \
+		$(HOST_MAKE_FLAGS) -f ../makefiles/linux_32bit.mak \
+		src/bin/BuiltHamcoreFiles/unix/hamcore.se2
 endef
 
 define Host/Install
