@@ -84,6 +84,10 @@ define Package/softethervpn/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/rc/vpnbridge $(1)/etc/init.d/softethervpnbridge
 endef
 
+define Host/Prepare
+	/bin/tar xzf $(DL_DIR)/$(PKG_SOURCE) -C $(HOST_BUILD_DIR) --strip-components 1
+endef
+
 define Host/Compile
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/Mayaqua \
 		$(HOST_MAKE_FLAGS)
