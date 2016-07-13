@@ -23,6 +23,7 @@ PKG_MAINTAINER:=
 PKG_LICENSE:=Custom
 PKG_LICENSE_FILES:=
 
+include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
 
@@ -81,4 +82,18 @@ define Package/softethervpn/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/rc/vpnbridge $(1)/etc/init.d/softethervpnbridge
 endef
 
+define Host/Compile
+	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/Mayaqua \
+		$(HOST_MAKE_FLAGS)
+	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/Cedar \
+		$(HOST_MAKE_FLAGS)
+	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/src/hamcorebuilder \
+		$(HOST_MAKE_FLAGS)
+endef
+
+define Host/Install
+	$(INSTALL) -m 0755 $(HOST_BUILD_DIR)/src/hamcorebuilder/hamcorebuilder $(STAGING_DIR)/host/bin/hamcorebuilder
+endef
+
+$(eval $(call HostBuild))
 $(eval $(call BuildPackage,softethervpn))
