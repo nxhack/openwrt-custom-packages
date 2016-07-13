@@ -97,7 +97,7 @@ endef
 define Host/Compile
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR) \
 		$(HOST_MAKE_FLAGS) -f src/makefiles/linux_32bit.mak \
-		CC="gcc -I$(STAGING_DIR)/usr/include/readline" \
+		CC="cc -I$(STAGING_DIR)/usr/include" \
 		src/bin/BuiltHamcoreFiles/unix/hamcore.se2
 endef
 
