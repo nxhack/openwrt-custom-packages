@@ -67,7 +67,7 @@ define Build/Configure
 endef
 
 TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/src/duktape/src -I$(STAGING_DIR)/usr/include/ajtcl
-TARGET_LDFLAGS+=-lajtcl -lajtcl_services_config -lajtcl_services
+#TARGET_LDFLAGS+=-lajtcl -lajtcl_services_config -lajtcl_services
 
 define Build/Compile
 	YUN_BUILD=0 \
