@@ -90,6 +90,7 @@ define Build/Compile
 		CPU=openwrt \
 		OS=openwrt \
 		"TARGET_CFLAGS=$$(TARGET_CFLAGS)" \
+		"TARGET_CPPFLAGS=$$(TARGET_CPPFLAGS)" \
 		"BINDINGS=$(ALLJOYN_BINDINGS)" \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef
