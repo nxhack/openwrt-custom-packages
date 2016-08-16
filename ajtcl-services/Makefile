@@ -30,7 +30,7 @@ PKG_LICENSE_FILES:=
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/scons.mk
 
-ALLJOYN_BINDINGS:=cpp,
+ALLJOYN_BINDINGS:=c
 
 define Package/$(PKG_NAME)/Default
   SECTION:=net
