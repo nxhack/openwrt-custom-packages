@@ -83,11 +83,12 @@ define Build/Compile
 	CROSS_PREFIX=$(TARGET_CC:gcc=) \
 	scons -C $(PKG_BUILD_DIR) \
 		$(PKG_JOBS) \
-		TARG=linux \
 		BR=off \
 		BT=off \
 		ICE=off \
 		WS=off \
+		CPU=openwrt \
+		OS=openwrt \
 		"BINDINGS=$(ALLJOYN_BINDINGS)" \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef
