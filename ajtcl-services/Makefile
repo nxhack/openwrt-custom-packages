@@ -76,12 +76,12 @@ endef
 TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/include/ajtcl
 
 define Build/Compile
-	$(SCONS_VARS) \
 	CROSS_CFLAGS="$(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(FPIC) $(TARGET_CPPFLAGS) $(EXTRA_CPPFLAGS)" \
 	CROSS_LINKFLAGS="$(TARGET_LINKFLAGS) $(TARGET_LDFLAGS)" \
 	CROSS_PATH=$(TARGET_PATH) \
 	CROSS_PREFIX=$(TARGET_CC:gcc=) \
 	scons -C $(PKG_BUILD_DIR) \
+		$(SCONS_VARS) \
 		$(PKG_JOBS) \
 		BR=off \
 		BT=off \
@@ -89,8 +89,6 @@ define Build/Compile
 		WS=off \
 		CPU=openwrt \
 		OS=openwrt \
-		"TARGET_CFLAGS=$$(TARGET_CFLAGS)" \
-		"TARGET_CPPFLAGS=$$(TARGET_CPPFLAGS)" \
 		"BINDINGS=$(ALLJOYN_BINDINGS)" \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef
