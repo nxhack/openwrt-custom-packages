@@ -82,7 +82,7 @@ define Build/Compile
 		$(SCONS_OPTIONS) \
 		$(PKG_JOBS) \
 		TARG=linux \
-		BR=off \
+		BR=on \
 		ICE=off \
 		POLICYDB=on \
 		WS=off \

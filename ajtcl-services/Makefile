@@ -83,8 +83,8 @@ define Build/Compile
 		$(PKG_JOBS) \
 		TARG=linux \
 		BR=off \
+		BT=off \
 		ICE=off \
-		POLICYDB=on \
 		WS=off \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef

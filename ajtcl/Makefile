@@ -79,7 +79,7 @@ define Build/Compile
 	scons -C $(PKG_BUILD_DIR) \
 		$(PKG_JOBS) \
 		TARG=linux \
-		BR=off \
+		BR=on \
 		ICE=off \
 		POLICYDB=on \
 		WS=off \
