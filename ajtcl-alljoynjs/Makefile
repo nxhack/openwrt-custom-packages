@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ajtcl-alljoynjs
-PKG_VERSION:=15.04
+PKG_VERSION:=16.04
 PKG_RELEASE:=1
 
 PKG_SOURCE:=alljoyn-js-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://git.allseenalliance.org/cgit/core/alljoyn-js.git/snapshot/
-PKG_MD5SUM:=276767da532bf845ca014c7a5d8f7885
+PKG_MD5SUM:=68983d7aa23ce4da45a06dce95c21ad5
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/alljoyn-js-$(PKG_VERSION)
 
