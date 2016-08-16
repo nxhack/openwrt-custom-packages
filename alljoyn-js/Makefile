@@ -7,7 +7,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=ajtcl-alljoynjs
+PKG_NAME:=alljoyn-js
 PKG_VERSION:=16.04
 PKG_RELEASE:=1
 
