@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ajtcl-services
-PKG_VERSION:=16.04
+PKG_VERSION:=16.04a
 PKG_RELEASE:=1
 
-PKG_SOURCE:=base_tcl-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://git.allseenalliance.org/cgit/services/base_tcl.git/snapshot/
-PKG_MD5SUM:=3dfc63f9b256f5ed7b8d3a47d90f68b5
+PKG_SOURCE:=alljoyn-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://git.allseenalliance.org/cgit/core/alljoyn.git/snapshot/
+PKG_MD5SUM:=3cd25584c322e3ef6a9802b1b719a959
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/base_tcl-$(PKG_VERSION)
 
