@@ -34,7 +34,7 @@ define Package/$(PKG_NAME)
   TITLE:=AllJoyn Thin Client - AllJoynJS
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=ajtcl +ajtcl-services +duktape
+  DEPENDS:=+ajtcl +ajtcl-services +duktape
   URL:=http://www.allseenalliance.org
   MAINTAINER:=AllSeen Alliance <allseen-core@lists.allseenalliance.org>
   MENU:=1
@@ -67,7 +67,7 @@ define Build/Configure
 endef
 
 TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/src/duktape/src -I$(STAGING_DIR)/usr/include/ajtcl
-TARGET_LDFLAGS+=-lajtcl_services
+TARGET_LDFLAGS+=-lajtcl -lajtcl_services_config -lajtcl_services
 
 define Build/Compile
 	YUN_BUILD=0 \
