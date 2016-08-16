@@ -11,16 +11,12 @@ PKG_NAME:=logrotate
 PKG_VERSION:=3.9.1
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)_$(PKG_VERSION).orig.tar.gz
-PKG_SOURCE_URL:= \
-    http://ftp.debian.org/debian/pool/main/l/logrotate \
-    http://ftp.de.debian.org/debian/pool/main/l/logrotate \
-    http://ftp.fr.debian.org/debian/pool/main/l/logrotate \
-    http://ftp.us.debian.org/debian/pool/main/l/logrotate
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:= https://fedorahosted.org/releases/l/o/logrotate/
 PKG_MD5SUM:=4492b145b6d542e4a2f41e77fa199ab0
 
 PKG_MAINTAINER:=
-PKG_LICENSE:=GPL+
+PKG_LICENSE:=GPL-2.0+
 PKG_LICENSE_FILES:=COPYING
 
 include $(INCLUDE_DIR)/package.mk
@@ -29,8 +25,8 @@ define Package/logrotate
   SECTION:=utils
   CATEGORY:=Utilities
   DEPENDS:=+libpopt
-  TITLE:=rotates, compresses, and mails system logs
-  URL:=http://packages.debian.org/unstable/admin/logrotate
+  TITLE:=Rotates, compresses, and mails system logs
+  URL:=https://fedorahosted.org/logrotate/
 endef
 
 define Package/logrotate/description

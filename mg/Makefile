@@ -25,8 +25,8 @@ define Package/mg
   SECTION:=utils
   CATEGORY:=Utilities
   DEPENDS:=+libncurses
-  TITLE:=microscopic GNU Emacs-style editor portable
-  URL:=http://devio.us/~bcallah/mg/
+  TITLE:=Small Emacs-like editor
+  URL:=https://devio.us/~bcallah/mg/
   SUBMENU:=Editors
 endef
 
