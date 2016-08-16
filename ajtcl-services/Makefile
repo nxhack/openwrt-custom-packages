@@ -30,6 +30,8 @@ PKG_LICENSE_FILES:=
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/scons.mk
 
+ALLJOYN_BINDINGS:=cpp,
+
 define Package/$(PKG_NAME)/Default
   SECTION:=net
   CATEGORY:=Network
@@ -86,6 +88,7 @@ define Build/Compile
 		BT=off \
 		ICE=off \
 		WS=off \
+		"BINDINGS=$(ALLJOYN_BINDINGS)" \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)"
 endef
 
