@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2008-2011 OpenWrt.org
+# Copyright (C) 2008-2016 OpenWrt.org
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -17,7 +17,7 @@ PKG_MD5SUM:=520d555b85d04dd5025c0c8716dc0265
 
 PKG_MAINTAINER:=
 PKG_LICENSE:=ISC BSD
-PKG_LICENSE_FILES:=
+PKG_LICENSE_FILES:=README.md
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -31,11 +31,11 @@ define Package/mg
 endef
 
 define Package/mg/description
-	This program is intended to be a small, fast, and portable
-	editor for people who can't (or don't want to) run real
-	Emacs for one reason or another.  It is compatible with GNU
-	because there shouldn't be any reason to learn more than
-	one Emacs flavor.
+ This program is intended to be a small, fast, and portable
+ editor for people who can't (or don't want to) run real
+ Emacs for one reason or another. It is compatible with GNU
+ because there shouldn't be any reason to learn more than
+ one Emacs flavor.
 endef
 
 define Build/Configure
