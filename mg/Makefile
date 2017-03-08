@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2008-2016 OpenWrt.org
+# Copyright (C) 2008-2017 OpenWrt.org
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -13,11 +13,13 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://devio.us/~bcallah/mg/
-PKG_MD5SUM:=bcb4be59aaa30ae8dd0e9aed3c0a5ff8bf2dae6e6768396d37c11aaaab29d370
+PKG_MD5SUM:=5ca187eba256d43ddd7a4299dde030c1
+PKG_HASH:=bcb4be59aaa30ae8dd0e9aed3c0a5ff8bf2dae6e6768396d37c11aaaab29d370
 
-PKG_MAINTAINER:=
-PKG_LICENSE:=ISC BSD
+PKG_LICENSE:=PUBLICDOMAIN ISC BSD VARIOUS
 PKG_LICENSE_FILES:=README.md
+
+PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -45,15 +47,15 @@ define Build/Compile
 	$(MAKE) -C $(PKG_BUILD_DIR) \
 		LDFLAGS="$(TARGET_LDFLAGS)" \
 		LIBS="-lncurses" \
-		CFLAGS="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) \
-		-D_GNU_SOURCE -D__dead='__attribute__((__noreturn__))' \
-		-Dst_mtimespec=st_mtim -DNO_THEO" \
+		CFLAGS="$(TARGET_CFLAGS) \
+			-D_GNU_SOURCE -D__dead='__attribute__((__noreturn__))' \
+			-Dst_mtimespec=st_mtim -DNO_THEO" \
 		CC="$(TARGET_CC)"
 endef
 
 define Package/mg/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/mg $(1)/usr/bin/
 endef
 
 $(eval $(call BuildPackage,mg))
