@@ -27,17 +27,16 @@ define Package/mg
   SECTION:=utils
   CATEGORY:=Utilities
   DEPENDS:=+libncurses
-  TITLE:=Small Emacs-like editor
+  TITLE:=Small Emacs-like editor from OpenBSD
   URL:=https://devio.us/~bcallah/mg/
   SUBMENU:=Editors
 endef
 
 define Package/mg/description
- This program is intended to be a small, fast, and portable
- editor for people who can't (or don't want to) run real
- Emacs for one reason or another. It is compatible with GNU
- because there shouldn't be any reason to learn more than
- one Emacs flavor.
+ Mg is intended to be a small, fast, and portable editor for people who
+ can't (or don't want to) run emacs for one reason or another, or are not
+ familiar with the vi editor. It is compatible with emacs because there
+ shouldn't be any reason to learn more editor types than emacs or vi.
 endef
 
 define Build/Configure
