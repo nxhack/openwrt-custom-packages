@@ -48,7 +48,7 @@ define Build/Compile
 		LIBS="-lncurses" \
 		CFLAGS="$(TARGET_CFLAGS) \
 			-D_GNU_SOURCE -D__dead='__attribute__((__noreturn__))' \
-			-Dst_mtimespec=st_mtim -DNO_THEO" \
+			-Dst_mtimespec=st_mtim" \
 		CC="$(TARGET_CC)"
 endef
 
