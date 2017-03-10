@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mg
 PKG_VERSION:=20161016
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://devio.us/~bcallah/mg/
@@ -26,7 +26,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/mg
   SECTION:=utils
   CATEGORY:=Utilities
-  DEPENDS:=+libncurses
+  DEPENDS:=+libncurses +libpcre
   TITLE:=Small Emacs-like editor from OpenBSD
   URL:=https://devio.us/~bcallah/mg/
   SUBMENU:=Editors
@@ -45,10 +45,10 @@ endef
 define Build/Compile
 	$(MAKE) -C $(PKG_BUILD_DIR) \
 		LDFLAGS="$(TARGET_LDFLAGS)" \
-		LIBS="-lncurses" \
+		LIBS="-lncurses -lpcre" \
 		CFLAGS="$(TARGET_CFLAGS) \
 			-D_GNU_SOURCE -D__dead='__attribute__((__noreturn__))' \
-			-Dst_mtimespec=st_mtim" \
+			-Dst_mtimespec=st_mtim -DREGEX" \
 		CC="$(TARGET_CC)"
 endef
 
