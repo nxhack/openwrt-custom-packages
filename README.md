@@ -8,5 +8,4 @@ Note: Testing target only ar71xx.
 
 ## License
 
-See:
-- [OpenWrt license](http://wiki.openwrt.org/about/license)
+See [LICENSE](LICENSE) file.
