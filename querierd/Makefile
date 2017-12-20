@@ -15,7 +15,6 @@ PKG_SOURCE_SUBDIR:=marc_culler-querierd-$(PKG_BRANCH)
 PKG_HASH:=dba4f0605ab83be330bda6c19683287ed21fac9d7f2be6bbdfcbd237bea9a8f0
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
-PKG_BUILD_DEPENDS:=python
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-2.0
@@ -45,21 +44,12 @@ define Build/Prepare
 	$(Build/Patch)
 endef
 
-define Build/Compile
-	$(call Build/Compile/PyMod,,\
-		install --prefix="/usr" --root="$(PKG_INSTALL_DIR)" \
-	)
-endef
-
 define Package/querierd/install
+	$(call PyPackage/querierd/install)
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/querierd.init $(1)/etc/init.d/querierd
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
-
-	$(INSTALL_DIR) $(1)$(PYTHON_PKG_DIR)
-	$(CP) \
-		$(PKG_INSTALL_DIR)$(PYTHON_PKG_DIR)/* \
-		$(1)$(PYTHON_PKG_DIR)
 endef
 
+$(eval $(call PyPackage,querierd))
 $(eval $(call BuildPackage,querierd))
