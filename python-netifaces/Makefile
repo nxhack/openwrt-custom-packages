@@ -4,11 +4,11 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=python-netifaces
+PKG_NAME:=netifaces
 PKG_VERSION:=0.10.6
 PKG_RELEASE:=1
 
-PKG_SOURCE:=netifaces-$(PKG_VERSION).tar.gz
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://pypi.python.org/packages/72/01/ba076082628901bca750bf53b322a8ff10c1d757dc29196a8e6082711c9d
 PKG_HASH:=0c4da523f36d36f1ef92ee183f2512f3ceb9a9d2a45f7d19cda5a42c6689ebe0
 
@@ -16,7 +16,7 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=README.rst
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-netifaces-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-$(PKG_NAME)-$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
 $(call include_mk, python-package.mk)
