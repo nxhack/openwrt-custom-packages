@@ -44,6 +44,12 @@ define Build/Prepare
 	$(Build/Patch)
 endef
 
+define Build/Compile
+	$(call Build/Compile/PyMod,,\
+		install --prefix="/usr" --root="$(PKG_INSTALL_DIR)" \
+	)
+endef
+
 define Package/querierd/install
 	$(call PyPackage/querierd/install)
 	$(INSTALL_DIR) $(1)/etc/init.d
