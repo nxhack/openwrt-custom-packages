@@ -51,11 +51,14 @@ define Build/Compile
 endef
 
 define Package/querierd/install
-	$(call PyPackage/querierd/install)
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/querierd.init $(1)/etc/init.d/querierd
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
+
+	$(INSTALL_DIR) $(1)$(PYTHON_PKG_DIR)
+	$(CP) \
+		$(PKG_INSTALL_DIR)$(PYTHON_PKG_DIR)/* \
+		$(1)$(PYTHON_PKG_DIR)
 endef
 
-$(eval $(call PyPackage,querierd))
 $(eval $(call BuildPackage,querierd))
