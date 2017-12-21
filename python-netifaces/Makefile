@@ -16,6 +16,7 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=README.rst
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 
+PKG_BUILD_DEPENDS:=python python-setuptools
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-$(PKG_NAME)-$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
