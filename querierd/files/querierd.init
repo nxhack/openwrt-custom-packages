@@ -1,7 +1,6 @@
 #!/bin/sh /etc/rc.common
 
 START=98
-USE_PROCD=1
 
 PYTHON=/usr/bin/python
 CONFIG=/etc/querierd
