@@ -4,7 +4,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=python-querierd
+PKG_NAME:=querierd
 PKG_VERSION:=0.2
 PKG_RELEASE:=3
 PKG_BRANCH:=afa077c36c02
@@ -14,32 +14,25 @@ PKG_SOURCE_URL:=https://bitbucket.org/marc_culler/querierd/get/
 PKG_SOURCE_SUBDIR:=marc_culler-querierd-$(PKG_BRANCH)
 PKG_HASH:=dba4f0605ab83be330bda6c19683287ed21fac9d7f2be6bbdfcbd237bea9a8f0
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-querierd-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
 include $(INCLUDE_DIR)/package.mk
-#include ../python-package.mk
+#include ../../lang/python/python-package.mk
 $(call include_mk, python-package.mk)
 
-define Package/python-querierd/Default
+define Package/querierd
   SECTION:=net
   CATEGORY:=Network
-  URL:=https://bitbucket.org/marc_culler/querierd
-endef
-
-define Package/python-querierd
-$(call Package/python-querierd/Default)
   TITLE:=IGMP querier service
   URL:=https://bitbucket.org/marc_culler/querierd
-  DEPENDS:=+PACKAGE_python-querierd:python-light \
-           +PACKAGE_python-querierd:python-netifaces
-  VARIANT:=python
+  DEPENDS:=+python-light +python-netifaces
 endef
 
-define Package/python-querierd/description
+define Package/querierd/description
 The querierd daemon will participate in the querier election process,
 so you can run querierd daemons on several devices on your network,
 some of which may not be running all the time.
@@ -58,17 +51,11 @@ define Build/Compile
 	)
 endef
 
-define Package/python-querierd/install
+define PyPackage/querierd/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/querierd.init $(1)/etc/init.d/querierd
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
-
-	$(INSTALL_DIR) $(1)$(PYTHON_PKG_DIR)
-	$(CP) \
-		$(PKG_INSTALL_DIR)$(PYTHON_PKG_DIR)/* \
-		$(1)$(PYTHON_PKG_DIR)
 endef
 
-#$(eval $(call PyPackage,python-querierd))
-$(eval $(call BuildPackage,python-querierd))
-#$(eval $(call BuildPackage,python-querierd-src))
+$(eval $(call PyPackage,querierd))
+$(eval $(call BuildPackage,querierd))
