@@ -19,8 +19,8 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-$(PKG_NAME)-$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
-#include ../python-package.mk
-#include ../python3-package.mk
+#include ../../packages/lang/python/python-package.mk
+#include ../../packages/lang/python/python3-package.mk
 $(call include_mk, python-package.mk)
 $(call include_mk, python3-package.mk)
 
