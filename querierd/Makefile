@@ -21,8 +21,8 @@ PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
 include $(INCLUDE_DIR)/package.mk
-#include ../../lang/python/python-package.mk
-$(call include_mk, python-package.mk)
+include ../../lang/python/python-package.mk
+#$(call include_mk, python-package.mk)
 
 define Package/querierd
   SECTION:=net
