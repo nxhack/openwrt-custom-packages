@@ -4,9 +4,9 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=querierd
+PKG_NAME:=python-querierd
 PKG_VERSION:=0.2
-PKG_RELEASE:=2
+PKG_RELEASE:=3
 PKG_BRANCH:=afa077c36c02
 
 PKG_SOURCE:=$(PKG_BRANCH).zip
@@ -14,24 +14,32 @@ PKG_SOURCE_URL:=https://bitbucket.org/marc_culler/querierd/get/
 PKG_SOURCE_SUBDIR:=marc_culler-querierd-$(PKG_BRANCH)
 PKG_HASH:=dba4f0605ab83be330bda6c19683287ed21fac9d7f2be6bbdfcbd237bea9a8f0
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-querierd-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
 include $(INCLUDE_DIR)/package.mk
+#include ../python-package.mk
 $(call include_mk, python-package.mk)
 
-define Package/querierd
+define Package/python-querierd/Default
   SECTION:=net
   CATEGORY:=Network
-  TITLE:=IGMP querier service
   URL:=https://bitbucket.org/marc_culler/querierd
-  DEPENDS:=+python-light +python-netifaces
 endef
 
-define Package/querierd/description
+define Package/python-querierd
+$(call Package/python-querierd/Default)
+  TITLE:=IGMP querier service
+  URL:=https://bitbucket.org/marc_culler/querierd
+  DEPENDS:=+PACKAGE_python-querierd:python-light \
+           +PACKAGE_python-querierd:python-netifaces
+  VARIANT:=python
+endef
+
+define Package/python-querierd/description
 The querierd daemon will participate in the querier election process,
 so you can run querierd daemons on several devices on your network,
 some of which may not be running all the time.
@@ -44,21 +52,14 @@ define Build/Prepare
 	$(Build/Patch)
 endef
 
-define Build/Compile
+define PyBuild/Compile
 	$(call Build/Compile/PyMod,,\
 		install --prefix="/usr" --root="$(PKG_INSTALL_DIR)" \
 	)
-endef
-
-define Package/querierd/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/querierd.init $(1)/etc/init.d/querierd
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
-
-	$(INSTALL_DIR) $(1)$(PYTHON_PKG_DIR)
-	$(CP) \
-		$(PKG_INSTALL_DIR)$(PYTHON_PKG_DIR)/* \
-		$(1)$(PYTHON_PKG_DIR)
 endef
 
-$(eval $(call BuildPackage,querierd))
+$(eval $(call BuildPackage,python-querierd))
+#$(eval $(call BuildPackage,python-querierd-src))
