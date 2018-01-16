@@ -16,7 +16,6 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=README.rst
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 
-PKG_BUILD_DEPENDS:=python python-setuptools
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-$(PKG_NAME)-$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
@@ -35,14 +34,14 @@ endef
 define Package/python-netifaces
 $(call Package/python-netifaces/Default)
   TITLE:=python-netifaces
-  DEPENDS:=+PACKAGE_python-netifaces:python-light
+  DEPENDS:=+PACKAGE_python-netifaces:python-light +PACKAGE_python-netifaces:python-setuptools
   VARIANT:=python
 endef
 
 define Package/python3-netifaces
 $(call Package/python-netifaces/Default)
   TITLE:=python3-netifaces
-  DEPENDS:=+PACKAGE_python3-netifaces:python3-light
+  DEPENDS:=+PACKAGE_python3-netifaces:python3-light +PACKAGE_python3-netifaces:python3-setuptools
   VARIANT:=python3
 endef
 
