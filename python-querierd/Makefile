@@ -61,5 +61,6 @@ define PyBuild/Compile
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
 endef
 
+$(eval $(call PyPackage,python-querierd))
 $(eval $(call BuildPackage,python-querierd))
 #$(eval $(call BuildPackage,python-querierd-src))
