@@ -52,13 +52,15 @@ define Build/Prepare
 	$(Build/Patch)
 endef
 
-define PyBuild/Compile
-	$(call Build/Compile/PyMod,,\
-		install --prefix="/usr" --root="$(PKG_INSTALL_DIR)" \
-	)
+define Package/python-querierd/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/querierd.init $(1)/etc/init.d/querierd
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
+
+	$(INSTALL_DIR) $(1)$(PYTHON_PKG_DIR)
+	$(CP) \
+		$(PKG_INSTALL_DIR)$(PYTHON_PKG_DIR)/* \
+		$(1)$(PYTHON_PKG_DIR)
 endef
 
 $(eval $(call PyPackage,python-querierd))
