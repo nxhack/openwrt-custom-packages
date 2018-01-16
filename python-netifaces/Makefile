@@ -57,5 +57,7 @@ endef
 
 $(eval $(call PyPackage,python-netifaces))
 $(eval $(call BuildPackage,python-netifaces))
+$(eval $(call BuildPackage,python-netifaces-src))
 $(eval $(call Py3Package,python3-netifaces))
 $(eval $(call BuildPackage,python3-netifaces))
+$(eval $(call BuildPackage,python3-netifaces-src))
