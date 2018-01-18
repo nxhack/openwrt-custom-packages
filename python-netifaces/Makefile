@@ -36,14 +36,14 @@ endef
 define Package/python-netifaces
 $(call Package/python-netifaces/Default)
   TITLE:=python-netifaces
-  DEPENDS:=+PACKAGE_python-netifaces:python-light +PACKAGE_python-netifaces:python-setuptools
+  DEPENDS:=+PACKAGE_python-netifaces:python-light
   VARIANT:=python
 endef
 
 define Package/python3-netifaces
 $(call Package/python-netifaces/Default)
   TITLE:=python3-netifaces
-  DEPENDS:=+PACKAGE_python3-netifaces:python3-light +PACKAGE_python3-netifaces:python3-setuptools
+  DEPENDS:=+PACKAGE_python3-netifaces:python3-light
   VARIANT:=python3
 endef
 
