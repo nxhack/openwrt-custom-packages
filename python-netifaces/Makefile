@@ -18,6 +18,11 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-$(PKG_NAME)-$(PKG_VERSION)
 
+PKG_BUILD_DEPENDS:=PACKAGE_python-netifaces:python \
+                   PACKAGE_python-netifaces:python-setuptools \
+                   PACKAGE_python3-netifaces:python \
+                   PACKAGE_python3-netifaces:python3-setuptools
+
 include $(INCLUDE_DIR)/package.mk
 #include ../../packages/lang/python/python-package.mk
 #include ../../packages/lang/python/python3-package.mk
