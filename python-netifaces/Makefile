@@ -24,8 +24,8 @@ PKG_BUILD_DEPENDS:=PACKAGE_python-netifaces:python \
                    PACKAGE_python3-netifaces:python3-setuptools
 
 include $(INCLUDE_DIR)/package.mk
-#include $(TOPDIR)/feeds/packages/lang/python/python-package.mk
-#include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
+include $(TOPDIR)/feeds/packages/lang/python/python-package.mk
+include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 $(call include_mk, python-package.mk)
 $(call include_mk, python3-package.mk)
 
