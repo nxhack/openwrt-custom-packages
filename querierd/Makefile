@@ -21,8 +21,11 @@ PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
 include $(INCLUDE_DIR)/package.mk
+ifeq ($(CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_OPENWRT),y)
 include $(TOPDIR)/feeds/packages/lang/python/python-package.mk
+else
 $(call include_mk, python-package.mk)
+endif
 
 define Package/querierd
   SECTION:=net
