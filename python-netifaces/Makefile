@@ -29,7 +29,8 @@ include $(INCLUDE_DIR)/package.mk
 ifdef CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE
 $(call include_mk, python-package.mk)
 $(call include_mk, python3-package.mk)
-else
+endif
+ifdef CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_OPENWRT
 include $(TOPDIR)/feeds/packages/lang/python/python-package.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 endif
