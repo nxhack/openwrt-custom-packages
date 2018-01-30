@@ -18,6 +18,8 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-$(PKG_NAME)-$(PKG_VERSION)
 
+$(info lede $(CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE))
+$(info musl $(CONFIG_USE_MUSL))
 ifdef CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE
 PKG_BUILD_DEPENDS:=PACKAGE_python-netifaces:python \
                    PACKAGE_python-netifaces:python-setuptools \
