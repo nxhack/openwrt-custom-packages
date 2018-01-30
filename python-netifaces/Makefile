@@ -18,9 +18,6 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-$(PKG_NAME)-$(PKG_VERSION)
 
-$(info lede $(CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE))
-$(info musl $(CONFIG_USE_MUSL))
-$(info dir $(TOPDIR))
 ifdef CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE
 PKG_BUILD_DEPENDS:=PACKAGE_python-netifaces:python \
                    PACKAGE_python-netifaces:python-setuptools \
@@ -29,6 +26,9 @@ PKG_BUILD_DEPENDS:=PACKAGE_python-netifaces:python \
 endif
 
 include $(INCLUDE_DIR)/package.mk
+$(info lede $(CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE))
+$(info musl $(CONFIG_USE_MUSL))
+$(info dir $(TOPDIR))
 ifdef CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE
   PYTHON_MK_PATH:=python/files
 else
@@ -69,6 +69,10 @@ $(call Package/python-netifaces/description)
 .
 (Variant for Python3)
 endef
+
+$(info lede $(CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE))
+$(info musl $(CONFIG_USE_MUSL))
+$(info dir $(TOPDIR))
 
 $(eval $(call PyPackage,python-netifaces))
 $(eval $(call BuildPackage,python-netifaces))
