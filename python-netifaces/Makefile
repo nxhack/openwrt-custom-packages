@@ -18,19 +18,19 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-$(PKG_NAME)-$(PKG_VERSION)
 
-PYTHON_MK_PATH:=$(TOPDIR)/feeds/packages/lang/python
-ifneq ("$(wildcard $(PYTHON_MK_PATH)/python-package.mk)","")
+PYTHON_MK_PATH:=$(TOPDIR)/feeds/packages/lang/python/python-package.mk
+ifneq ("$(wildcard $(PYTHON_MK_PATH))","")
 PKG_BUILD_DEPENDS:=PACKAGE_python-netifaces:python \
                    PACKAGE_python-netifaces:python-setuptools \
                    PACKAGE_python3-netifaces:python \
                    PACKAGE_python3-netifaces:python3-setuptools
-else
-PYTHON_MK_PATH+=/files
 endif
 
 include $(INCLUDE_DIR)/package.mk
-include $(PYTHON_MK_PATH)/python-package.mk
-include $(PYTHON_MK_PATH)/python3-package.mk
+ifneq ("$(wildcard $(PYTHON_MK_PATH))","")
+include $(TOPDIR)/feeds/packages/lang/python/python-package.mk
+include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
+endif
 
 PKG_UNPACK:=$(HOST_TAR) -C $(PKG_BUILD_DIR) --strip-components=1 -xzf $(DL_DIR)/$(PKG_SOURCE)
 
