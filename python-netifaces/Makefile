@@ -25,14 +25,15 @@ PKG_BUILD_DEPENDS:=PACKAGE_python-netifaces:python \
                    PACKAGE_python3-netifaces:python3-setuptools
 endif
 
-include $(INCLUDE_DIR)/package.mk
 ifdef CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE
-$(call include_mk, python-package.mk)
-$(call include_mk, python3-package.mk)
+PYTHON_MK_PATH:=python/files
 else
-include $(TOPDIR)/feeds/packages/lang/python/python-package.mk
-include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
+PYTHON_MK_PATH:=python
 endif
+include $(INCLUDE_DIR)/package.mk
+include $(TOPDIR)/feeds/packages/lang/$(PYTHON_MK_PATH)/python-package.mk
+include $(TOPDIR)/feeds/packages/lang/$(PYTHON_MK_PATH)/python3-package.mk
+
 
 PKG_UNPACK:=$(HOST_TAR) -C $(PKG_BUILD_DIR) --strip-components=1 -xzf $(DL_DIR)/$(PKG_SOURCE)
 
