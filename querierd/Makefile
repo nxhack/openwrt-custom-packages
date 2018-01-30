@@ -20,11 +20,13 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
+
 include $(INCLUDE_DIR)/package.mk
-ifdef CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE
-$(call include_mk, python-package.mk)
+PYTHON_MK:=$(TOPDIR)/feeds/packages/lang/python/python-package.mk
+ifneq ("$(wildcard $(PYTHON_MK))","")
+include $(PYTHON_MK)
 else
-include $(TOPDIR)/feeds/packages/lang/python/python-package.mk
+$(call include_mk, python-package.mk)
 endif
 
 define Package/querierd
