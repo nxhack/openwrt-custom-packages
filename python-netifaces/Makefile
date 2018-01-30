@@ -26,8 +26,8 @@ PKG_BUILD_DEPENDS:=PACKAGE_python-netifaces:python \
 endif
 
 include $(INCLUDE_DIR)/package.mk
-$(info lede $(CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE))
-$(info musl $(CONFIG_USE_MUSL))
+$(info lede $(BUSYBOX_DEFAULT_NSLOOKUP_LEDE))
+$(info musl $(USE_MUSL))
 $(info dir $(TOPDIR))
 ifdef CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE
   PYTHON_MK_PATH:=python/files
@@ -69,10 +69,6 @@ $(call Package/python-netifaces/description)
 .
 (Variant for Python3)
 endef
-
-$(info lede $(CONFIG_BUSYBOX_DEFAULT_NSLOOKUP_LEDE))
-$(info musl $(CONFIG_USE_MUSL))
-$(info dir $(TOPDIR))
 
 $(eval $(call PyPackage,python-netifaces))
 $(eval $(call BuildPackage,python-netifaces))
