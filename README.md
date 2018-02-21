@@ -2,7 +2,7 @@
 
 ## Description
 
-OpenWrt Custom Packages : for trunk (Bleeding Edge)
+OpenWrt Custom Packages : for trunk / lede-17.01
 
 Note: Testing target only ar71xx.
 
