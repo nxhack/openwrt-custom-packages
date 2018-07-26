@@ -19,7 +19,7 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-$(PKG_NAME)-$(PKG_VERSION)
 
 OW_VER:=$(shell git --git-dir=$(TOPDIR)/.git describe --abbrev=0 --always --tag)
-ifneq ("$(filter reboot v18.06%, $(OW_VER))","")
+ifneq ($(filter reboot v18.06%, $(OW_VER)),)
   IS_HEAD:=y
 endif
 
