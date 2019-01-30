@@ -35,7 +35,7 @@ define Package/mg/description
 endef
 
 define Build/Compile
-	$(MAKE) -C $(PKG_BUILD_DIR) \
+	$(MAKE) -f Makefile -C $(PKG_BUILD_DIR) \
 		LDFLAGS="$(TARGET_LDFLAGS)" \
 		LIBS="-lncurses -lpcre" \
 		CFLAGS="$(TARGET_CFLAGS) \
