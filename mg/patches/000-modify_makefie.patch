@@ -22,3 +22,14 @@
  
  ifdef STATIC
    LDFLAGS=-static -static-libgcc
+@@ -45,9 +45,9 @@
+ CC?=		gcc
+ CFLAGS?=	-O2 -pipe
+ CFLAGS+=	-g -Wall
+-CPPFLAGS=	-DREGEX
+-CPPFLAGS+=	-D_GNU_SOURCE
+-CPPFLAGS+=	$(BSD_CPPFLAGS)
++#CPPFLAGS=	-DREGEX
++#CPPFLAGS+=	-D_GNU_SOURCE
++#CPPFLAGS+=	$(BSD_CPPFLAGS)
+ LIBS=		$(CURSES_LIBS) $(BSD_LIBS)

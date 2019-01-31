@@ -34,13 +34,13 @@ define Package/mg/description
  shouldn't be any reason to learn more editor types than emacs or vi.
 endef
 
+TARGET_CFLAGS+= -D_GNU_SOURCE -isystem $(STAGING_DIR)/usr/include/bsd -DREGEX
+
 define Build/Compile
 	$(MAKE) prefix=/usr -C $(PKG_BUILD_DIR) \
 		LDFLAGS="$(TARGET_LDFLAGS)" \
 		LIBS="-lncurses -lpcre -lbsd" \
-		CFLAGS="$(TARGET_CFLAGS) \
-			-D_GNU_SOURCE -D__dead='__attribute__((__noreturn__))' \
-			-Dst_mtimespec=st_mtim -DREGEX" \
+		CFLAGS="$(TARGET_CFLAGS)" \
 		CC="$(TARGET_CC)"
 endef
 
