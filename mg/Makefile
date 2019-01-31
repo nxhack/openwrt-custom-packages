@@ -35,9 +35,9 @@ define Package/mg/description
 endef
 
 define Build/Compile
-	$(MAKE) -f Makefile -C $(PKG_BUILD_DIR) \
+	$(MAKE) prefix=/usr -C $(PKG_BUILD_DIR) \
 		LDFLAGS="$(TARGET_LDFLAGS)" \
-		LIBS="-lncurses -lpcre" \
+		LIBS="-lncurses -lpcre -lbsd" \
 		CFLAGS="$(TARGET_CFLAGS) \
 			-D_GNU_SOURCE -D__dead='__attribute__((__noreturn__))' \
 			-Dst_mtimespec=st_mtim -DREGEX" \
