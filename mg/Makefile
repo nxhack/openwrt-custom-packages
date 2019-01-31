@@ -5,13 +5,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mg
-PKG_VERSION:=20180421
-PKG_RELEASE:=2
+PKG_VERSION:=20180927
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-# PKG_SOURCE_URL:=https://devio.us/~bcallah/mg/ is temporarily offline
-PKG_SOURCE_URL:=https://dl.bintray.com/homebrew/mirror/
-PKG_HASH:=11215613a360cf72ff16c2b241ea4e71b4b80b2be32c62a770c1969599e663b2
+PKG_SOURCE_URL:=https://codeload.github.com/ibara/mg/tar.gz/$(PKG_NAME)-$(PKG_VERSION)?
+PKG_HASH:=6121eb373b8fd5a6166522c7f47158decc3ea5c219788c723a8d8c43c22f85ae
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=PUBLICDOMAIN ISC BSD VARIOUS
@@ -23,8 +23,8 @@ define Package/mg
   SECTION:=utils
   CATEGORY:=Utilities
   DEPENDS:=+libncurses +libpcre
-  TITLE:=Small Emacs-like editor from OpenBSD
-  URL:=https://devio.us/~bcallah/mg/
+  TITLE:=Small Emacs-like editor
+  URL:=https://github.com/ibara/mg
   SUBMENU:=Editors
 endef
 
