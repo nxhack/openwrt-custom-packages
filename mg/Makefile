@@ -34,7 +34,7 @@ define Package/mg/description
  shouldn't be any reason to learn more editor types than emacs or vi.
 endef
 
-TARGET_CFLAGS+= -D_GNU_SOURCE -isystem $(STAGING_DIR)/usr/include/bsd -DREGEX
+TARGET_CFLAGS+= -D_GNU_SOURCE -isystem $(STAGING_DIR)/usr/include/bsd -DLIBBSD_OVERLAY -DREGEX
 
 define Build/Compile
 	$(MAKE) prefix=/usr -C $(PKG_BUILD_DIR) \
