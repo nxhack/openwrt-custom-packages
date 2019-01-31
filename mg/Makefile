@@ -5,13 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mg
-PKG_VERSION:=20180421
-PKG_RELEASE:=2
+PKG_VERSION:=20180927
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-# PKG_SOURCE_URL:=https://devio.us/~bcallah/mg/ is temporarily offline
-PKG_SOURCE_URL:=https://dl.bintray.com/homebrew/mirror/
-PKG_HASH:=11215613a360cf72ff16c2b241ea4e71b4b80b2be32c62a770c1969599e663b2
+PKG_SOURCE_URL:=https://codeload.github.com/hboetes/mg/tar.gz/$(PKG_VERSION)?
+PKG_HASH:=fbb09729ea00fe42dcdbc96ac7fc1d2b89eac651dec49e4e7af52fad4f5788f6
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=PUBLICDOMAIN ISC BSD VARIOUS
@@ -22,9 +21,9 @@ include $(INCLUDE_DIR)/package.mk
 define Package/mg
   SECTION:=utils
   CATEGORY:=Utilities
-  DEPENDS:=+libncurses +libpcre
-  TITLE:=Small Emacs-like editor from OpenBSD
-  URL:=https://devio.us/~bcallah/mg/
+  DEPENDS:=+libncurses +libpcre +libbsd
+  TITLE:=microscopic EMACS style editor
+  URL:=https://github.com/hboetes/mg
   SUBMENU:=Editors
 endef
 
@@ -33,6 +32,16 @@ define Package/mg/description
  can't (or don't want to) run emacs for one reason or another, or are not
  familiar with the vi editor. It is compatible with emacs because there
  shouldn't be any reason to learn more editor types than emacs or vi.
+endef
+
+TARGET_CFLAGS+= -D_GNU_SOURCE -isystem $(STAGING_DIR)/usr/include/bsd -DLIBBSD_OVERLAY -DREGEX
+
+define Build/Compile
+	$(MAKE) prefix=/usr -C $(PKG_BUILD_DIR) \
+		LDFLAGS="$(TARGET_LDFLAGS)" \
+		LIBS="-lncurses -lpcre -lbsd" \
+		CFLAGS="$(TARGET_CFLAGS)" \
+		CC="$(TARGET_CC)"
 endef
 
 define Package/mg/install

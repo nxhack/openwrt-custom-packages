@@ -1,0 +1,35 @@
+--- a/GNUmakefile
++++ b/GNUmakefile
+@@ -29,14 +29,14 @@
+ # Test is some required libraries are installed. Rather bummer that
+ # they are also required to run make clean or uninstall. Oh well... Who
+ # does that?
+-ifeq ($(BSD_LIBS),)
+-  $(error You probably need to install "libbsd-dev" or "libbsd-devel" or something like that.)
+-endif
++#ifeq ($(BSD_LIBS),)
++#  $(error You probably need to install "libbsd-dev" or "libbsd-devel" or something like that.)
++#endif
+ 
+-CURSES_LIBS:= $(shell $(PKG_CONFIG) --libs ncurses)
+-ifeq ($(CURSES_LIBS),)
+-  $(error You probably need to install "libncurses5-dev" or "libncurses6-devel" or something like that.)
+-endif
++#CURSES_LIBS:= $(shell $(PKG_CONFIG) --libs ncurses)
++#ifeq ($(CURSES_LIBS),)
++#  $(error You probably need to install "libncurses5-dev" or "libncurses6-devel" or something like that.)
++#endif
+ 
+ ifdef STATIC
+   LDFLAGS=-static -static-libgcc
+@@ -45,9 +45,9 @@
+ CC?=		gcc
+ CFLAGS?=	-O2 -pipe
+ CFLAGS+=	-g -Wall
+-CPPFLAGS=	-DREGEX
+-CPPFLAGS+=	-D_GNU_SOURCE
+-CPPFLAGS+=	$(BSD_CPPFLAGS)
++#CPPFLAGS=	-DREGEX
++#CPPFLAGS+=	-D_GNU_SOURCE
++#CPPFLAGS+=	$(BSD_CPPFLAGS)
+ LIBS=		$(CURSES_LIBS) $(BSD_LIBS)
