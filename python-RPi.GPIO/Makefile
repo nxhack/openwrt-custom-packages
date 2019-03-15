@@ -41,6 +41,9 @@ endif
 
 PKG_UNPACK:=$(HOST_TAR) -C $(PKG_BUILD_DIR) --strip-components=1 -xzf $(DL_DIR)/$(PKG_SOURCE)
 
+PYTHON_PKG_SETUP_ARGS:=
+PYTHON3_PKG_SETUP_ARGS:=
+
 define Package/python-RPi.GPIO/Default
   SECTION:=lang
   CATEGORY:=Languages
@@ -71,9 +74,6 @@ $(call Package/python-RPi.GPIO/description)
 .
 (Variant for Python3)
 endef
-
-PYTHON_PKG_SETUP_ARGS:=
-PYTHON3_PKG_SETUP_ARGS:=
 
 $(eval $(call PyPackage,python-RPi.GPIO))
 $(eval $(call BuildPackage,python-RPi.GPIO))
