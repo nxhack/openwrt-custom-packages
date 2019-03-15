@@ -72,6 +72,8 @@ $(call Package/python-RPi.GPIO/description)
 (Variant for Python3)
 endef
 
+PYTHON_PKG_SETUP_ARGS:=
+
 $(eval $(call PyPackage,python-RPi.GPIO))
 $(eval $(call BuildPackage,python-RPi.GPIO))
 #$(eval $(call BuildPackage,python-RPi.GPIO-src))
