@@ -26,7 +26,7 @@ endif
 ifneq ($(IS_HEAD),y)
 PKG_BUILD_DEPENDS:=PACKAGE_python-RPi.GPIO:python \
                    PACKAGE_python-RPi.GPIO:python-setuptools \
-                   PACKAGE_python3-RPi.GPIO:python \
+                   PACKAGE_python3-RPi.GPIO:python3 \
                    PACKAGE_python3-RPi.GPIO:python3-setuptools
 endif
 
