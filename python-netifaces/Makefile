@@ -26,7 +26,7 @@ endif
 ifneq ($(IS_HEAD),y)
 PKG_BUILD_DEPENDS:=PACKAGE_python-netifaces:python \
                    PACKAGE_python-netifaces:python-setuptools \
-                   PACKAGE_python3-netifaces:python \
+                   PACKAGE_python3-netifaces:python3 \
                    PACKAGE_python3-netifaces:python3-setuptools
 endif
 
