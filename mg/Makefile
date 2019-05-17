@@ -9,7 +9,7 @@ PKG_VERSION:=20180927
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://codeload.github.com/ibara/mg/tar.gz/$(PKG_VERSION)?
+PKG_SOURCE_URL:=https://codeload.github.com/ibara/mg/tar.gz/$(PKG_NAME)-$(PKG_VERSION)?
 PKG_HASH:=99b2fd2cf9d6474153d6c5769c818dd5514c147b8a8ad660a5e114bc1ebd504d
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
