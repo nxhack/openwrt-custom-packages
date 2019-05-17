@@ -54,7 +54,7 @@
  fgetlncheck() {
    cat << EOF > conftest.c
  #include <stdio.h>
-@@ -161,21 +114,6 @@
+@@ -162,21 +115,6 @@
    fi
  }
  
@@ -76,7 +76,7 @@
  # Option variables
  if [ ! -z "$PREFIX" ] ; then
    prefix="$PREFIX"
-@@ -240,53 +178,9 @@
+@@ -241,53 +179,9 @@
    ldflags="${ldflags}-static"
  fi
  
@@ -100,7 +100,7 @@
 -fi
 -
 -printf "checking for OS... "
--libs='-lcurses'
+-libs='-lncurses'
 -os=`uname -s`
 -echo "$os"
 -
