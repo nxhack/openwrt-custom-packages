@@ -23,7 +23,7 @@ PKG_USE_MIPS16:=0
 GO_PKG:=github.com/shadowsocks/v2ray-plugin
 
 include $(INCLUDE_DIR)/package.mk
-include ../../lang/golang/golang-package.mk
+include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
 
 define Package/v2ray-plugin
   SECTION:=net
