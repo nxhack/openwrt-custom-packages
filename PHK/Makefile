@@ -22,10 +22,6 @@ PKG_USE_MIPS16:=0
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/PHK/description
- This project will provide source code to build a HomeKit support accessories.
-endef
-
 define Package/PHK
   SECTION:=utils
   CATEGORY:=Utilities
@@ -33,6 +29,12 @@ define Package/PHK
   URL:=https://github.com/etwmc/Personal-HomeKit-HAP
   DEPENDS:=+libavahi-compat-libdnssd +libopenssl
 endef
+
+define Package/PHK/description
+ This project will provide source code to build a HomeKit support accessories.
+endef
+
+TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/include/avahi-compat-libdns_sd
 
 define Package/PHK/install
 	$(INSTALL_DIR) $(1)/usr/sbin
