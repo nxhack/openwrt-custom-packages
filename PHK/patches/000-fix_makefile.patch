@@ -5,8 +5,8 @@
 -CFLAG = -Os -s -I/usr/local/ssl/include/ -I/usr/local/include/ -I/usr/local/include/avahi-compat-libdns_sd/
 -CC = gcc
 -CPP = g++
-+LINK = $(TARGET_LDFLAGS)
-+CFLAG = $(TARGER_CFLAGS)
++LINK = $(LDFLAGS)
++CFLAG = $(CFLAGS)
 +#CC = gcc
 +#CPP = g++
  PHK_LIBNAME=libphk
