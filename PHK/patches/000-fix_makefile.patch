@@ -26,10 +26,10 @@
  all: PHK
  PHK: $(OBJFILE)
 -	$(CPP) $(CFLAG) -o PHK $(OBJFILE) $(LINK)
-+	$(CPP) $(CXXFLAGS) -o PHK $(OBJFILE) $(LDFLAGS)
++	$(CXX) $(CXXFLAGS) -o PHK $(OBJFILE) $(LDFLAGS)
  phklib: PHK
 -	$(CPP) $(CFLAG) -dynamiclib $(LINK) -o $(PHK_LIBFILE) $(PHK_OBJFILES)
-+	$(CPP) $(CXXFLAGS) -dynamiclib $(LDFLAGS) -o $(PHK_LIBFILE) $(PHK_OBJFILES)
++	$(CXX) $(CXXFLAGS) -dynamiclib $(LDFLAGS) -o $(PHK_LIBFILE) $(PHK_OBJFILES)
  chacha20.o: Chacha20/chacha20_simple.c Chacha20/chacha20_simple.h
 -	$(CC) $(CFLAG) -w -o chacha20.o -c Chacha20/chacha20_simple.c
 +	$(CC) $(CFLAGS) -w -o chacha20.o -c Chacha20/chacha20_simple.c
@@ -50,6 +50,6 @@
 +	$(CC) $(CFLAGS) -lcrypto -w -c $< -o $@
  %.o: %.cpp
 -	$(CPP) $(CFLAG) -w -c $<
-+	$(CPP) $(CXXFLAGS) -w -c $<
++	$(CXX) $(CXXFLAGS) -w -c $<
  clean:
  	rm -rf *.o Chacha20/*.o curve25519/*.o ed25519-donna/*.o poly1305-opt-master/*.o rfc6234-master/*.o srp/*.o PHK $(PHK_LIBFILE)
