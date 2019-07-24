@@ -1,0 +1,56 @@
+--- a/srp/t_math.c
++++ b/srp/t_math.c
+@@ -350,18 +350,12 @@
+      unsigned int c2;
+ {
+ #ifdef OPENSSL
+-  if(c1->top > 1)
+-    return 1;
+-  else if(c1->top < 1)
+-    return (c2 > 0) ? -1 : 0;
+-  else {
+-    if(c1->d[0] > c2)
+-      return 1;
+-    else if(c1->d[0] < c2)
+-      return -1;
+-    else
+-      return 0;
+-  }
++  BIGNUM * a = BN_new();
++  int rv;
++  BN_set_word(a, c2);
++  rv = BN_cmp(c1, a);
++  BN_free(a);
++  return rv;
+ #elif defined(CRYPTOLIB)
+   BigInteger t;
+   int rv;
+@@ -688,25 +682,9 @@
+      BigIntegerModAccel a;
+ {
+ #ifdef OPENSSL
+-  BN_CTX * ctx = NULL;
+-  if(c == NULL)
+-    c = ctx = BN_CTX_new();
+-  if(default_modexp) {
+-    (*default_modexp)(r, b, e, m, c, a);
+-  }
+-  else if(a == NULL) {
+-    BN_mod_exp(r, b, e, m, c);
+-  }
+-#if OPENSSL_VERSION_NUMBER >= 0x00906000
+-  else if(b->top == 1) {  /* 0.9.6 and above has mont_word optimization */
+-    BN_ULONG B = b->d[0];
+-    BN_mod_exp_mont_word(r, B, e, m, c, a);
+-  }
+-#endif
+-  else
+-    BN_mod_exp_mont(r, b, e, m, c, a);
+-  if(ctx)
+-    BN_CTX_free(ctx);
++  BN_CTX * ctx = BN_CTX_new();
++  BN_mod_exp(r, b, e, m, ctx);
++  BN_CTX_free(ctx);
+ #elif defined(CRYPTOLIB)
+   bigPow(b, e, m, r);
+ #elif defined(GNU_MP)

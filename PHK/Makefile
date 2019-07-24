@@ -35,6 +35,7 @@ define Package/PHK/description
 endef
 
 TARGET_CFLAGS+=-I$(STAGING_DIR)/usr/include/avahi-compat-libdns_sd
+TARGET_LDFLAGS+=-lcrypto -lssl
 
 define Package/PHK/install
 	$(INSTALL_DIR) $(1)/usr/sbin
