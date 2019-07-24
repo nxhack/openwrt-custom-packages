@@ -11,6 +11,7 @@ PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/nxhack/Personal-HomeKit-HAP/tar.gz/$(PKG_VERSION)?
 PKG_HASH:=407f34d55ddc75594afb0abbf502a718f3d89a1c65f4657782043dea045fe4d2
+PKG_BUILD_DIR:=$(BUILD_DIR)/Personal-HomeKit-HAP-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT
