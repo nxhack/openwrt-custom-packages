@@ -27,7 +27,7 @@ define Package/PHK
   CATEGORY:=Utilities
   TITLE:=PHK -- prints a snarky message
   URL:=https://github.com/etwmc/Personal-HomeKit-HAP
-  DEPENDS:=+libavahi-compat-libdnssd +libopenssl
+  DEPENDS:=+libavahi-compat-libdnssd +libopenssl +libstdcpp
 endef
 
 define Package/PHK/description
