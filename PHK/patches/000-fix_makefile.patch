@@ -1,0 +1,14 @@
+--- a/makefile
++++ b/makefile
+@@ -1,7 +1,7 @@
+-LINK = -lssl -lcrypto -ldl -lpthread
+-CFLAG = -Os -s -I/usr/local/ssl/include/ -I/usr/local/include/ -I/usr/local/include/avahi-compat-libdns_sd/
+-CC = gcc
+-CPP = g++
++LINK = $(TARGET_LDFLAGS)
++CFLAG = $(TARGER_CFLAGS)
++#CC = gcc
++#CPP = g++
+ PHK_LIBNAME=libphk
+ ifeq ($(OS),Windows_NT)
+     PHK_LIBFILE=$(PHK_LIBNAME).dll
