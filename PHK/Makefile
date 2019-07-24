@@ -39,7 +39,7 @@ TARGET_LDFLAGS+=-lcrypto -lssl
 
 define Package/PHK/install
 	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/PHK $(1)/usr/sbin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/PHK $(1)/usr/sbin/
 endef
 
 $(eval $(call BuildPackage,PHK))
