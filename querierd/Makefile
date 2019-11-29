@@ -39,20 +39,20 @@ so you can run querierd daemons on several devices on your network,
 some of which may not be running all the time.
 endef
 
-define Build/Prepare
+define Py3Build/Prepare
 	$(PKG_UNPACK)
 	(cd $(BUILD_DIR) && mv $(PKG_SOURCE_SUBDIR)/* $(PKG_BUILD_DIR)/ && \
 	mv $(PKG_SOURCE_SUBDIR)/.??* $(PKG_BUILD_DIR)/ && rmdir $(PKG_SOURCE_SUBDIR))
 	$(Build/Patch)
 endef
 
-define Build/Compile
-	$(call Build/Compile/PyMod,,\
+define Py3Build/Compile
+	$(call Build/Compile/Py3Mod,,\
 		install --prefix="/usr" --root="$(PKG_INSTALL_DIR)" \
 	)
 endef
 
-define PyPackage/querierd/install
+define Py3Package/querierd/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/querierd.init $(1)/etc/init.d/querierd
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
