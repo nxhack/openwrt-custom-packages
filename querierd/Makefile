@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=querierd
 PKG_VERSION:=0.2
-PKG_RELEASE:=3
+PKG_RELEASE:=4
 PKG_BRANCH:=afa077c36c02
 
 PKG_SOURCE:=$(PKG_BRANCH).zip
