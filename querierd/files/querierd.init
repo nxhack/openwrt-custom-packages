@@ -2,7 +2,7 @@
 
 START=98
 
-PYTHON=/usr/bin/python
+PYTHON=/usr/bin/python3
 CONFIG=/etc/querierd
 
 test -e $CONFIG || exit 0

@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=querierd
 PKG_VERSION:=0.2
-PKG_RELEASE:=3
+PKG_RELEASE:=4
 PKG_BRANCH:=afa077c36c02
 
 PKG_SOURCE:=$(PKG_BRANCH).zip
@@ -20,21 +20,15 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
-
 include $(INCLUDE_DIR)/package.mk
-PYTHON_MK:=$(TOPDIR)/feeds/packages/lang/python/python-package.mk
-ifneq ("$(wildcard $(PYTHON_MK))","")
-include $(PYTHON_MK)
-else
-$(call include_mk, python-package.mk)
-endif
+include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 
 define Package/querierd
   SECTION:=net
   CATEGORY:=Network
   TITLE:=IGMP querier service
   URL:=https://bitbucket.org/marc_culler/querierd
-  DEPENDS:=+python-light +python-netifaces
+  DEPENDS:=+python3-light +python3-netifaces
 endef
 
 define Package/querierd/description
@@ -51,16 +45,18 @@ define Build/Prepare
 endef
 
 define Build/Compile
-	$(call Build/Compile/PyMod,,\
+	$(call Build/Compile/Py3Mod,,\
 		install --prefix="/usr" --root="$(PKG_INSTALL_DIR)" \
 	)
 endef
 
-define PyPackage/querierd/install
+define Package/querierd/install
+	$(INSTALL_DIR) $(1)$(PYTHON3_PKG_DIR)
 	$(INSTALL_DIR) $(1)/etc/init.d
+	$(CP) $(PKG_INSTALL_DIR)$(PYTHON3_PKG_DIR)/* \
+		$(1)$(PYTHON3_PKG_DIR)/
 	$(INSTALL_BIN) ./files/querierd.init $(1)/etc/init.d/querierd
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
 endef
 
-$(eval $(call PyPackage,querierd))
 $(eval $(call BuildPackage,querierd))
