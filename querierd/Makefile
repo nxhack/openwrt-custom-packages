@@ -28,7 +28,7 @@ define Package/querierd
   CATEGORY:=Network
   TITLE:=IGMP querier service
   URL:=https://bitbucket.org/marc_culler/querierd
-  DEPENDS:=+python3-light +python3-netifaces
+  DEPENDS:=+python3-light +python3-netifaces @BROKEN
 endef
 
 define Package/querierd/description
