@@ -20,8 +20,6 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
-
-include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 
@@ -39,24 +37,23 @@ so you can run querierd daemons on several devices on your network,
 some of which may not be running all the time.
 endef
 
-define Py3Build/Prepare
+define Build/Prepare
 	$(PKG_UNPACK)
 	(cd $(BUILD_DIR) && mv $(PKG_SOURCE_SUBDIR)/* $(PKG_BUILD_DIR)/ && \
 	mv $(PKG_SOURCE_SUBDIR)/.??* $(PKG_BUILD_DIR)/ && rmdir $(PKG_SOURCE_SUBDIR))
 	$(Build/Patch)
 endef
 
-define Py3Build/Compile
+define Build/Compile
 	$(call Build/Compile/Py3Mod,,\
 		install --prefix="/usr" --root="$(PKG_INSTALL_DIR)" \
 	)
 endef
 
-define Py3Package/querierd/install
+define Package/querierd/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/querierd.init $(1)/etc/init.d/querierd
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
 endef
 
-$(eval $(call Py3Package,querierd))
 $(eval $(call BuildPackage,querierd))
