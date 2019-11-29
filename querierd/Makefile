@@ -21,20 +21,16 @@ PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
 
+include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
-PYTHON_MK:=$(TOPDIR)/feeds/packages/lang/python/python-package.mk
-ifneq ("$(wildcard $(PYTHON_MK))","")
-include $(PYTHON_MK)
-else
-$(call include_mk, python-package.mk)
-endif
+include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 
 define Package/querierd
   SECTION:=net
   CATEGORY:=Network
   TITLE:=IGMP querier service
   URL:=https://bitbucket.org/marc_culler/querierd
-  DEPENDS:=+python-light +python-netifaces
+  DEPENDS:=+python3-light +python3-netifaces
 endef
 
 define Package/querierd/description
@@ -62,5 +58,5 @@ define PyPackage/querierd/install
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
 endef
 
-$(eval $(call PyPackage,querierd))
+$(eval $(call Py3Package,querierd))
 $(eval $(call BuildPackage,querierd))
