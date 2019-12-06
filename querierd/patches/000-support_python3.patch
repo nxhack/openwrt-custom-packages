@@ -1,3 +1,13 @@
+diff -urN a/etc/querierd b/etc/querierd
+--- a/etc/querierd	2017-06-27 10:38:07.000000000 +0900
++++ b/etc/querierd	2019-12-06 14:26:41.408931485 +0900
+@@ -1,5 +1,5 @@
+ [querierd]
+ query_interval=60
+-interface=eth0
++interface=br-lan
+ # The next item is ignored by the upstart script
+ pidfile=/var/run/querierd.pid
 diff -urN a/querier/__init__.py b/querier/__init__.py
 --- a/querier/__init__.py	2017-06-27 10:38:07.000000000 +0900
 +++ b/querier/__init__.py	2019-12-06 12:56:52.786820466 +0900
