@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=querierd
 PKG_VERSION:=0.2
-PKG_RELEASE:=4
+PKG_RELEASE:=5
 PKG_BRANCH:=afa077c36c02
 
 PKG_SOURCE:=$(PKG_BRANCH).zip
@@ -28,7 +28,7 @@ define Package/querierd
   CATEGORY:=Network
   TITLE:=IGMP querier service
   URL:=https://bitbucket.org/marc_culler/querierd
-  DEPENDS:=+python3-light +python3-netifaces @BROKEN
+  DEPENDS:=+python3-light +python3-netifaces
 endef
 
 define Package/querierd/description
