@@ -10,17 +10,8 @@ diff -urN a/etc/querierd b/etc/querierd
  pidfile=/var/run/querierd.pid
 diff -urN a/querier/__init__.py b/querier/__init__.py
 --- a/querier/__init__.py	2017-06-27 10:38:07.000000000 +0900
-+++ b/querier/__init__.py	2019-12-06 12:56:52.786820466 +0900
-@@ -26,6 +26,8 @@
- all_routers = '224.0.0.1'
- mdns_group = '224.0.0.251'
- 
-+dummy_payload = '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-+
- class Querier:
-     """
-     Sends an IGMP query packet at a specified time interval (in seconds).
-@@ -50,7 +52,7 @@
++++ b/querier/__init__.py	2019-12-06 18:35:58.842267267 +0900
+@@ -50,7 +50,7 @@
          def sigterm_handler(signal, frame):
              self.stop = True
          signal.signal(signal.SIGTERM, sigterm_handler)
@@ -29,7 +20,7 @@ diff -urN a/querier/__init__.py b/querier/__init__.py
      def build_query_packet(self):
          igmp = IGMPv2Packet()
          igmp.type = 'query'
-@@ -63,14 +65,23 @@
+@@ -63,14 +63,21 @@
          ip.src = self.source_address
          ip.dst = all_routers
          ip.data = igmp
@@ -38,14 +29,12 @@ diff -urN a/querier/__init__.py b/querier/__init__.py
      def run(self):
          syslog.syslog('Querier starting.')
          self.listener = QueryListener(self.source_address)
-+        str1 = str(self.packet) + dummy_payload
-+        mesg = str1.encode('latin_1').decode('unicode-escape').encode('latin_1')
          while True:
              elapsed = self.listener.elapsed()
              if self.elected:
 -                self.socket.sendto(str(self.packet), (all_routers, 0))
 +                try:
-+                    self.socket.sendto(mesg, (all_routers, 0))
++                    self.socket.sendto(str(self.packet).encode('latin_1'), (all_routers, 0))
 +                except OSError as err:
 +                    syslog.syslog('socket error: {0}\n'.format(err))
 +                    break
@@ -55,7 +44,7 @@ diff -urN a/querier/__init__.py b/querier/__init__.py
                  if elapsed < self.interval:
                      self.elected = False
                      syslog.syslog('Lost querier election. Pausing.')
-@@ -108,16 +119,16 @@
+@@ -108,16 +115,16 @@
  
      def _ip_as_int(self, address):
          return struct.unpack("!I", socket.inet_aton(address))[0]
@@ -284,13 +273,13 @@ diff -urN a/querier/daemon.py b/querier/daemon.py
 -
 diff -urN a/querier/packets.py b/querier/packets.py
 --- a/querier/packets.py	2017-06-27 10:38:07.000000000 +0900
-+++ b/querier/packets.py	2019-12-06 12:36:00.574498476 +0900
++++ b/querier/packets.py	2019-12-06 18:35:04.481359662 +0900
 @@ -51,7 +51,7 @@
  
      def header(self):
          values = [getattr(self, field) for field in self.fields]
 -        return struct.pack(self.format, *values)
-+        return str(struct.pack(self.format, *values))[2:-1]
++        return struct.pack(self.format, *values).decode('latin_1')
  
      def compute_checksum(self):
          self.checksum = 0
