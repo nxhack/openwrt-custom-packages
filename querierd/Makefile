@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=querierd
 PKG_VERSION:=0.2
-PKG_RELEASE:=5
+PKG_RELEASE:=6
 PKG_BRANCH:=afa077c36c02
 
 PKG_SOURCE:=$(PKG_BRANCH).zip
@@ -42,12 +42,6 @@ define Build/Prepare
 	(cd $(BUILD_DIR) && mv $(PKG_SOURCE_SUBDIR)/* $(PKG_BUILD_DIR)/ && \
 	mv $(PKG_SOURCE_SUBDIR)/.??* $(PKG_BUILD_DIR)/ && rmdir $(PKG_SOURCE_SUBDIR))
 	$(Build/Patch)
-endef
-
-define Build/Compile
-	$(call Build/Compile/Py3Mod,,\
-		install --prefix="/usr" --root="$(PKG_INSTALL_DIR)" \
-	)
 endef
 
 define Package/querierd/install
