@@ -6,15 +6,21 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=querierd
 PKG_VERSION:=0.2
-PKG_RELEASE:=6
-PKG_BRANCH:=afa077c36c02
+PKG_RELEASE:=7
 
-PKG_SOURCE:=$(PKG_BRANCH).zip
-PKG_SOURCE_URL:=https://bitbucket.org/marc_culler/querierd/get/
-PKG_SOURCE_SUBDIR:=marc_culler-querierd-$(PKG_BRANCH)
-PKG_HASH:=dba4f0605ab83be330bda6c19683287ed21fac9d7f2be6bbdfcbd237bea9a8f0
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/nxhack/querierd.git
+PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE_VERSION:=167eb2fec2936ea6e75836fdeaae2771ae7c8d3c
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+#PKG_MIRROR_HASH:=dba4f0605ab83be330bda6c19683287ed21fac9d7f2be6bbdfcbd237bea9a8f0
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
+#PKG_BRANCH:=afa077c36c02
+#PKG_SOURCE:=$(PKG_BRANCH).zip
+#PKG_SOURCE_URL:=https://bitbucket.org/marc_culler/querierd/get/
+#PKG_SOURCE_SUBDIR:=marc_culler-querierd-$(PKG_BRANCH)
+#PKG_HASH:=dba4f0605ab83be330bda6c19683287ed21fac9d7f2be6bbdfcbd237bea9a8f0
+#PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-2.0
@@ -37,12 +43,12 @@ so you can run querierd daemons on several devices on your network,
 some of which may not be running all the time.
 endef
 
-define Build/Prepare
-	$(PKG_UNPACK)
-	(cd $(BUILD_DIR) && mv $(PKG_SOURCE_SUBDIR)/* $(PKG_BUILD_DIR)/ && \
-	mv $(PKG_SOURCE_SUBDIR)/.??* $(PKG_BUILD_DIR)/ && rmdir $(PKG_SOURCE_SUBDIR))
-	$(Build/Patch)
-endef
+#define Build/Prepare
+#	$(PKG_UNPACK)
+#	(cd $(BUILD_DIR) && mv $(PKG_SOURCE_SUBDIR)/* $(PKG_BUILD_DIR)/ && \
+#	mv $(PKG_SOURCE_SUBDIR)/.??* $(PKG_BUILD_DIR)/ && rmdir $(PKG_SOURCE_SUBDIR))
+#	$(Build/Patch)
+#endef
 
 define Package/querierd/install
 	$(INSTALL_DIR) $(1)$(PYTHON3_PKG_DIR)
