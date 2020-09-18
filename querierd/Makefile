@@ -33,7 +33,7 @@ define Package/querierd
   SECTION:=net
   CATEGORY:=Network
   TITLE:=IGMP querier service
-  URL:=https://bitbucket.org/marc_culler/querierd
+  URL:=https://marc-culler.info/software/
   DEPENDS:=+python3-light +python3-netifaces
 endef
 
