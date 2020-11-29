@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=querierd
 PKG_VERSION:=0.2
-PKG_RELEASE:=7
+PKG_RELEASE:=8
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/nxhack/querierd.git
@@ -25,8 +25,6 @@ PKG_MIRROR_HASH:=3ec425362edb7026d269e5719f3adf16f55d8534c3267e22345348f18eb1713
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
-
-PYTHON3_PKG_BUILD:=0
 
 include ../../packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
