@@ -33,8 +33,8 @@ PKG_USE_MIPS16:=0
 PYTHON3_PKG_BUILD:=0
 
 include $(INCLUDE_DIR)/package.mk
-include ../devel/ninja/ninja-cmake.mk
-include ../lang/python/python3-package.mk
+include ../../packages/devel/ninja/ninja-cmake.mk
+include ../../packages/lang/python/python3-package.mk
 
 CMAKE_OPTIONS += \
 	-DENABLEEXAMPLES=0 \
