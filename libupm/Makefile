@@ -33,8 +33,8 @@ PKG_USE_MIPS16:=0
 PYTHON3_PKG_BUILD:=0
 
 include $(INCLUDE_DIR)/package.mk
-include ../packages/devel/ninja/ninja-cmake.mk
-include ../packages/lang/python/python3-package.mk
+include ../../packages/devel/ninja/ninja-cmake.mk
+include ../../packages/lang/python/python3-package.mk
 
 UPM_MODULES:= \
 	a110x abp ad8232 adafruitms1438 adafruitss adc121c021 adis16448 ads1x15 adxl335 adxl345 \
