@@ -26,7 +26,8 @@ PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=LICENSE
 
 PKG_HOST_ONLY:=1
-PKG_FIXUP:=libtool
+PKG_REMOVE_FILES:=autogen.sh
+PKG_FIXUP:=autoreconf
 HOST_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/host-build.mk
