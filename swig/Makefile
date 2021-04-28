@@ -26,12 +26,11 @@ PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=LICENSE
 
 PKG_HOST_ONLY:=1
-PKG_FIXUP:=libtool
+PKG_FIXUP:=autoreconf
 HOST_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/nls.mk
 
 define Package/swig
   SECTION:=libs
@@ -42,6 +41,7 @@ define Package/swig
 endef
 
 HOST_CONFIGURE_ARGS += \
+	--disable-ccache \
 	--without-pcre
 
 define Package/swig/description
