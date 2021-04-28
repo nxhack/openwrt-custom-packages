@@ -48,7 +48,7 @@ define Package/swig/description
 endef
 
 define Host/Configure
-	(cd $(PKG_BUILD_DIR); ./autogen.sh );
+	(cd $(HOST_BUILD_DIR); ./autogen.sh );
 	$(call Host/Configure/Default)
 endef
 
