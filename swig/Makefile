@@ -25,7 +25,6 @@ PKG_MAINTAINER:=John Crispin <blogic@openwrt.org>, Hirokazu MORIKAWA <morikw2@gm
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=LICENSE
 
-PKG_BUILD_DEPENDS:=python3/host node/host PACKAGE_node:node
 PKG_HOST_ONLY:=1
 HOST_BUILD_PARALLEL:=1
 
@@ -41,7 +40,6 @@ define Package/swig
 endef
 
 HOST_CONFIGURE_ARGS += \
-	--with-jsv8inc=$(STAGING_DIR_HOSTPKG)/include/node \
 	--disable-ccache \
 	--without-pcre
 
