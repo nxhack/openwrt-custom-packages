@@ -25,7 +25,6 @@ PKG_MAINTAINER:=John Crispin <blogic@openwrt.org>, Hirokazu MORIKAWA <morikw2@gm
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=LICENSE
 
-PKG_FIXUP:=autoreconf
 PKG_HOST_ONLY:=1
 HOST_BUILD_PARALLEL:=1
 
@@ -48,9 +47,9 @@ define Package/swig/description
   tool that generates bindings for various languages
 endef
 
-define Build/Configure
+define Host/Configure
 	(cd $(PKG_BUILD_DIR); ./autogen.sh );
-	$(call Build/Configure/Default)
+	$(call Host/Configure/Default)
 endef
 
 $(eval $(call HostBuild))
