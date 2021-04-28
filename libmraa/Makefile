@@ -40,6 +40,8 @@ include ../../packages/lang/python/python3-package.mk
 CMAKE_OPTIONS += \
 	-DENABLEEXAMPLES=0 \
 	-DBUILDSWIGNODE=$(if $(CONFIG_PACKAGE_libmraa-node),ON,OFF) \
+	-DSWIG_EXECUTABLE=$(STAGING_DIR_HOSTPKG)/bin/swig \
+	-DSWIG_DIR=$(STAGING_DIR_HOSTPKG)/share/swig \
 	-DFIRMATA=ON
 
 define Package/libmraa/Default
