@@ -1,17 +1,14 @@
 --- a/Lib/javascript/v8/javascriptruntime.swg
 +++ b/Lib/javascript/v8/javascriptruntime.swg
-@@ -56,10 +56,10 @@
- %insert(runtime) %{
+@@ -57,8 +57,9 @@
  #include <v8.h>
  
--#if defined(V8_MAJOR_VERSION) && defined(V8_MINOR_VERSION)
+ #if defined(V8_MAJOR_VERSION) && defined(V8_MINOR_VERSION)
 -#undef SWIG_V8_VERSION
 -#define SWIG_V8_VERSION (V8_MAJOR_VERSION * 256 + V8_MINOR_VERSION)
--#endif
-+//#if defined(V8_MAJOR_VERSION) && defined(V8_MINOR_VERSION)
-+//#undef SWIG_V8_VERSION
-+//#define SWIG_V8_VERSION (V8_MAJOR_VERSION * 256 + V8_MINOR_VERSION)
-+//#endif
++#ifndef SWIG_V8_VERSION
++#define SWIG_V8_VERSION (V8_MAJOR_VERSION * 65536 + V8_MINOR_VERSION * 4096)
++#endif
+ #endif
  
  #include <errno.h>
- #include <limits.h>
