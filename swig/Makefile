@@ -17,14 +17,15 @@ PKG_RELEASE:=0
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/swig/swig.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=429288fa1c753dcb2d34f363e51c3b924ac173bb
+PKG_SOURCE_VERSION:=5f8768daed3e19ebe2b26447bd3a42813efc316d
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_MIRROR_HASH:=7b939b655f4a3b6d4532a58a817bed787a3971f370eb4812b8356e60a81c8a37
+PKG_MIRROR_HASH:=a8e2b0431cf3083a5327f6d3e983728f6ef260b75d319a39cb27ccbe50a2cf49
 
 PKG_MAINTAINER:=John Crispin <blogic@openwrt.org>, Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=LICENSE
 
+HOST_BUILD_DEPENDS:=node/host
 PKG_HOST_ONLY:=1
 HOST_BUILD_PARALLEL:=1
 
@@ -40,8 +41,26 @@ define Package/swig
 endef
 
 HOST_CONFIGURE_ARGS += \
-	--disable-ccache \
-	--without-pcre
+	--with-jsv8inc=$(STAGING_DIR_HOSTPKG)/include/node \
+	--without-pcre \
+	--without-tcl \
+	--without-perl5 \
+	--without-octave \
+	--without-scilab \
+	--without-java \
+	--without-android \
+	--without-guile \
+	--without-mzscheme \
+	--without-ruby \
+	--without-php \
+	--without-ocaml \
+	--without-csharp \
+	--without-lua \
+	--without-r \
+	--without-go \
+	--without-d \
+	--disable-ccache
+
 
 define Package/swig/description
   tool that generates bindings for various languages

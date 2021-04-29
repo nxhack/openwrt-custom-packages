@@ -27,7 +27,7 @@ PKG_MAINTAINER:=John Crispin <blogic@openwrt.org>, Hirokazu MORIKAWA <morikw2@gm
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
 
-PKG_BUILD_DEPENDS:=swig/host node/host PACKAGE_node:node
+PKG_BUILD_DEPENDS:=swig/host
 CMAKE_INSTALL:=1
 CMAKE_BINARY_SUBDIR:=build
 PKG_USE_MIPS16:=0
@@ -42,6 +42,8 @@ CMAKE_OPTIONS += \
 	-DENABLEEXAMPLES=0 \
 	-DBUILDSWIGNODE=$(if $(CONFIG_PACKAGE_libmraa-node),ON,OFF) \
 	-DSWIG_EXECUTABLE=$(STAGING_DIR_HOSTPKG)/bin/swig \
+	-DV8_ROOT_DIR=$(STAGING_DIR_HOSTPKG)/include/node \
+	-DNODE_ROOT_DIR=$(STAGING_DIR_HOSTPKG)/include/node \
 	-DFIRMATA=ON
 
 define Package/libmraa/Default
@@ -75,7 +77,7 @@ endef
 define Package/libmraa-node
   $(call Package/libmraa/Default)
   TITLE:=Eclipse MRAA lowlevel IO Node.js library
-  DEPENDS:=+libmraa @PACKAGE_node
+  DEPENDS:=+libmraa +PACKAGE_node:node
 endef
 
 define Package/libmraa-node/description
