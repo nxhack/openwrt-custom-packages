@@ -25,6 +25,7 @@ PKG_MAINTAINER:=John Crispin <blogic@openwrt.org>, Hirokazu MORIKAWA <morikw2@gm
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=LICENSE
 
+PKG_BUILD_DEPENDS:=python3/host node/host
 PKG_HOST_ONLY:=1
 HOST_BUILD_PARALLEL:=1
 
@@ -40,8 +41,21 @@ define Package/swig
 endef
 
 HOST_CONFIGURE_ARGS += \
-	--disable-ccache \
-	--without-pcre
+	--with-jsv8inc=$(STAGING_DIR_HOSTPKG)/include/node \
+	--with-python3=$(STAGING_DIR_HOSTPKG)/bin/python3 \
+	--without-pcre \
+	--without-python \
+	--without-octave \
+	--without-scilab \
+	--without-java \
+	--without-android \
+	--without-guile \
+	--without-mzscheme \
+	--without-ocaml \
+	--without-csharp \
+	--without-r \
+	--without-d \
+	--disable-ccache
 
 define Package/swig/description
   tool that generates bindings for various languages
