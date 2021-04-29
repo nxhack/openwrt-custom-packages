@@ -25,7 +25,7 @@ PKG_MAINTAINER:=John Crispin <blogic@openwrt.org>, Hirokazu MORIKAWA <morikw2@gm
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=LICENSE
 
-HOST_BUILD_DEPENDS:=node/host
+HOST_BUILD_DEPENDS:=python3/host node/host node-gyp/host
 PKG_HOST_ONLY:=1
 HOST_BUILD_PARALLEL:=1
 
@@ -42,6 +42,8 @@ endef
 
 HOST_CONFIGURE_ARGS += \
 	--with-jsv8inc=$(STAGING_DIR_HOSTPKG)/include/node \
+	--with-python=$(STAGING_DIR_HOSTPKG)/bin/python3 \
+	--with-python3=$(STAGING_DIR_HOSTPKG)/bin/python3 \
 	--without-pcre \
 	--without-tcl \
 	--without-perl5 \
