@@ -44,18 +44,25 @@ HOST_CONFIGURE_ARGS += \
 	--with-jsv8inc=$(STAGING_DIR_HOSTPKG)/include/node \
 	--with-python3=$(STAGING_DIR_HOSTPKG)/bin/python3 \
 	--without-pcre \
+	--without-tcl \
 	--without-python \
+	--without-perl5 \
 	--without-octave \
 	--without-scilab \
 	--without-java \
 	--without-android \
 	--without-guile \
 	--without-mzscheme \
+	--without-ruby \
+	--without-php \
 	--without-ocaml \
 	--without-csharp \
+	--without-lua \
 	--without-r \
+	--without-go \
 	--without-d \
 	--disable-ccache
+
 
 define Package/swig/description
   tool that generates bindings for various languages
