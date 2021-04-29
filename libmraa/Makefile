@@ -43,6 +43,7 @@ CMAKE_OPTIONS += \
 	-DBUILDSWIGNODE=$(if $(CONFIG_PACKAGE_libmraa-node),ON,OFF) \
 	-DSWIG_EXECUTABLE=$(STAGING_DIR_HOSTPKG)/bin/swig \
 	-DV8_ROOT_DIR=$(STAGING_DIR_HOSTPKG)/include/node \
+	-DNODE_ROOT_DIR=$(STAGING_DIR_HOSTPKG)/include/node \
 	-DFIRMATA=ON
 
 define Package/libmraa/Default
