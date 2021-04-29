@@ -77,7 +77,7 @@ endef
 define Package/libmraa-node
   $(call Package/libmraa/Default)
   TITLE:=Eclipse MRAA lowlevel IO Node.js library
-  DEPENDS:=+libmraa @PACKAGE_node
+  DEPENDS:=+libmraa @PACKAGE_node:node
 endef
 
 define Package/libmraa-node/description
