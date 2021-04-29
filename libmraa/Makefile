@@ -27,7 +27,7 @@ PKG_MAINTAINER:=John Crispin <blogic@openwrt.org>, Hirokazu MORIKAWA <morikw2@gm
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
 
-PKG_BUILD_DEPENDS:=swig/host node/host PACKAGE_node:node
+PKG_BUILD_DEPENDS:=swig/host
 CMAKE_INSTALL:=1
 CMAKE_BINARY_SUBDIR:=build
 PKG_USE_MIPS16:=0
