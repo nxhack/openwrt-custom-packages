@@ -42,8 +42,6 @@ endef
 
 HOST_CONFIGURE_ARGS += \
 	--with-jsv8inc=$(STAGING_DIR_HOSTPKG)/include/node \
-	--without-python \
-	--with-python3=$(STAGING_DIR_HOSTPKG)/bin/python3 \
 	--without-pcre \
 	--without-tcl \
 	--without-perl5 \
