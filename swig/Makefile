@@ -42,10 +42,10 @@ endef
 
 HOST_CONFIGURE_ARGS += \
 	--with-jsv8inc=$(STAGING_DIR_HOSTPKG)/include/node \
+	--with-python=$(STAGING_DIR_HOSTPKG)/bin/python \
 	--with-python3=$(STAGING_DIR_HOSTPKG)/bin/python3 \
 	--without-pcre \
 	--without-tcl \
-	--without-python \
 	--without-perl5 \
 	--without-octave \
 	--without-scilab \
