@@ -25,7 +25,7 @@ PKG_MAINTAINER:=John Crispin <blogic@openwrt.org>, Hirokazu MORIKAWA <morikw2@gm
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=LICENSE
 
-HOST_BUILD_DEPENDS:=node/host
+HOST_BUILD_DEPENDS:=python3/host node/host
 PKG_HOST_ONLY:=1
 HOST_BUILD_PARALLEL:=1
 
