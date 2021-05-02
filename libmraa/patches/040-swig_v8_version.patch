@@ -1,5 +1,5 @@
 diff --git a/src/javascript/mraajs.i b/src/javascript/mraajs.i
-index 321cc22..797bc72 100644
+index 321cc22..4d9949c 100644
 --- a/src/javascript/mraajs.i
 +++ b/src/javascript/mraajs.i
 @@ -42,18 +42,18 @@ namespace mraa {
@@ -34,7 +34,7 @@ index 321cc22..797bc72 100644
     }
 -%#if SWIG_V8_VERSION > 0x040000
 -   v8::MaybeLocal<v8::Object> objret = node::Buffer::Copy(v8::Isolate::GetCurrent(), (char*) $1, result);
-+%#if (V8_MAJOR_VERSION-0) < 4 && (SWIG_V8_VERSION < 0x032870)
++%#if (V8_MAJOR_VERSION-0) < 4 && (SWIG_V8_VERSION <= 0x032870)
 +   $result = node::Buffer::New((char*) $1, result)->handle_;
     free($1);
 -   if(!objret.ToLocal(&$result)) {
