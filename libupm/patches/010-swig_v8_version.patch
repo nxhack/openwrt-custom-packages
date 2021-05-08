@@ -1,6 +1,6 @@
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -272,7 +272,9 @@ if (CMAKE_VERSION VERSION_LESS "3.1")
+@@ -265,7 +265,9 @@ if (CMAKE_VERSION VERSION_LESS "3.1")
    endif()
  else()
    # 3.1+ uses this generic method to enable c++11
