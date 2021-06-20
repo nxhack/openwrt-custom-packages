@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libmraa
 PKG_VERSION:=2.2.0
-PKG_RELEASE:=4
+PKG_RELEASE:=5
 
 #PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 #PKG_SOURCE_URL:=https://codeload.github.com/eclipse/mraa/tar.gz/v$(PKG_VERSION)?
@@ -46,6 +46,7 @@ CMAKE_OPTIONS += \
 	-DNODE_ROOT_DIR=$(STAGING_DIR_HOSTPKG)/include/node \
 	-DPYTHON2LIBS_FOUND=FALSE \
 	-DPYTHON2INTERP_FOUND=FALSE \
+	-DBUILDTESTS=OFF \
 	-DFIRMATA=ON
 
 define Package/libmraa/Default
