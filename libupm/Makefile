@@ -33,8 +33,8 @@ PKG_USE_MIPS16:=0
 PYTHON3_PKG_BUILD:=0
 
 include $(INCLUDE_DIR)/package.mk
-#include ../../packages/devel/ninja/ninja-cmake.mk
 include $(INCLUDE_DIR)/cmake.mk
+#include ../../lang/python/python3-package.mk
 include ../../packages/lang/python/python3-package.mk
 
 UPM_MODULES:= \
@@ -65,10 +65,10 @@ CMAKE_OPTIONS += \
 	-DSWIG_EXECUTABLE=$(STAGING_DIR_HOSTPKG)/bin/swig \
 	-DV8_ROOT_DIR=$(STAGING_DIR_HOSTPKG)/include/node \
 	-DNODE_ROOT_DIR=$(STAGING_DIR_HOSTPKG)/include/node \
-	-DWERROR=OFF \
-	-DCMAKE_CXX_STANDARD=14 \
 	-DPYTHON2LIBS_FOUND=FALSE \
-	-DPYTHON2INTERP_FOUND=FALSE
+	-DPYTHON2INTERP_FOUND=FALSE \
+	-DWERROR=OFF \
+	-DCMAKE_CXX_STANDARD=14
 
 define Package/libupm/Default
   SECTION:=libs
