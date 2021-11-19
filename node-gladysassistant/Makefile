@@ -63,7 +63,7 @@ define Build/Compile
 	npm_config_nodedir=$(STAGING_DIR)/usr/ \
 	npm_config_cache=$(TMP_DIR)/npm-cache-$(TMPNPM) \
 	npm_config_tmp=$(TMP_DIR)/npm-tmp-$(TMPNPM) \
-	npm install --global-style --no-save --no-package-lock --build-from-source --target_arch=$(NODEJS_CPU) --legacy-peer-deps
+	npm install --no-save --no-package-lock --legacy-peer-deps
 	rm -rf $(TMP_DIR)/npm-tmp-$(TMPNPM)
 	rm -rf $(TMP_DIR)/npm-cache-$(TMPNPM)
 	rm -rf $(PKG_BUILD_DIR)/services/ewelink/node_modules/bufferutil/prebuilds
