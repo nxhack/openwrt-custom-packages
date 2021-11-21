@@ -66,8 +66,6 @@ define Build/Compile
 	npm install --no-save --no-package-lock --legacy-peer-deps
 	rm -rf $(TMP_DIR)/npm-tmp-$(TMPNPM)
 	rm -rf $(TMP_DIR)/npm-cache-$(TMPNPM)
-	rm -rf $(PKG_BUILD_DIR)/services/ewelink/node_modules/bufferutil/prebuilds
-	rm -rf $(PKG_BUILD_DIR)/services/ewelink/node_modules/utf-8-validate/prebuilds
 	rm -f $(PKG_BUILD_DIR)/node_modules/.package-lock.json
 	find $(PKG_BUILD_DIR)/node_modules -type d -empty -print0 | xargs -0 rmdir || true
 
@@ -83,6 +81,8 @@ define Build/Compile
 	rm -rf $(TMP_DIR)/npm-cache-$(TMPNPM)
 	rm -rf $(PKG_BUILD_DIR)/server/services/ewelink/node_modules/bufferutil/prebuilds
 	rm -rf $(PKG_BUILD_DIR)/server/services/ewelink/node_modules/utf-8-validate/prebuilds
+	rm -rf $(PKG_BUILD_DIR)/server/node_modules/sqlite3/lib/binding/napi-v3-linux-x64
+	rm -rf $(PKG_BUILD_DIR)/server/node_modules/bcrypt/lib/binding/napi-v3
 	rm -f $(PKG_BUILD_DIR)/server/node_modules/.package-lock.json
 	find $(PKG_BUILD_DIR)/server/node_modules -type d -empty -print0 | xargs -0 rmdir || true
 
