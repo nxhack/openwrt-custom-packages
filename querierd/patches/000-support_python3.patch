@@ -9,6 +9,15 @@
  pidfile=/var/run/querierd.pid
 --- ./querier/daemon.py
 +++ ./querier/daemon.py
+@@ -23,7 +23,7 @@
+ 
+ import sys, os, time, atexit, netifaces
+ from signal import SIGTERM 
+-from ConfigParser import ConfigParser
++from configParser import ConfigParser
+ from . import Querier
+ 
+ config_file = '/etc/querierd'
 @@ -57,9 +57,8 @@ class QuerierDaemon:
              if pid > 0:
                  # exit first parent
