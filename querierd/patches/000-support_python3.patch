@@ -7,40 +7,76 @@
 +interface=br-lan
  # The next item is ignored by the upstart script
  pidfile=/var/run/querierd.pid
---- a/querier/daemon.py	2017-06-27 10:38:07.000000000 +0900
-+++ b/querier/daemon.py	2019-12-06 12:46:09.933105210 +0900
-@@ -23,7 +23,7 @@
+--- a/querier/daemon.py
++++ b/querier/daemon.py
+@@ -22,8 +22,8 @@
+ # along with QuerierD.  If not, see <http://www.gnu.org/licenses/>.
  
  import sys, os, time, atexit, netifaces
- from signal import SIGTERM 
+-from signal import SIGTERM 
 -from ConfigParser import ConfigParser
++from signal import SIGTERM
 +from configparser import ConfigParser
  from . import Querier
  
  config_file = '/etc/querierd'
-@@ -57,9 +57,8 @@ class QuerierDaemon:
+@@ -44,55 +44,54 @@ class QuerierDaemon:
+         self.source_address = source_address
+         self.pidfile = pidfile
+         self.stdin, self.stdout, self.stderr = stdin, stdout, stderr
+-    
++
+     def daemonize(self):
+         """
+-        Do the UNIX double-fork magic, see Stevens' "Advanced 
++        Do the UNIX double-fork magic, see Stevens' "Advanced
+         Programming in the UNIX Environment" for details
+         (ISBN 0201563177)
+         http://www.erlenstar.demon.co.uk/unix/faq_2.html#SEC16
+         """
+-        try: 
+-            pid = os.fork() 
++        try:
++            pid = os.fork()
              if pid > 0:
                  # exit first parent
-                 sys.exit(0) 
+-                sys.exit(0) 
 -        except OSError, e: 
 -            sys.stderr.write("fork #1 failed: %d (%s)\n" %
 -                             (e.errno, e.strerror))
++                sys.exit(0)
 +        except OSError as err:
 +            sys.stderr.write('fork #1 failed: {0}\n'.format(err))
              sys.exit(1)
-     
+-    
++
          # decouple from parent environment
-@@ -73,17 +72,16 @@ class QuerierDaemon:
+-        os.chdir("/") 
+-        os.setsid() 
+-        os.umask(0) 
+-    
++        os.chdir("/")
++        os.setsid()
++        os.umask(0)
++
+         # do second fork
+-        try: 
+-            pid = os.fork() 
++        try:
++            pid = os.fork()
              if pid > 0:
                  # exit from second parent
-                 sys.exit(0) 
+-                sys.exit(0) 
 -        except OSError, e: 
 -            sys.stderr.write("fork #2 failed: %d (%s)\n" %
 -                             (e.errno, e.strerror))
+-            sys.exit(1) 
+-    
++                sys.exit(0)
 +        except OSError as err:
 +            sys.stderr.write('fork #2 failed: {0}\n'.format(err))
-             sys.exit(1) 
-     
++            sys.exit(1)
++
          # redirect standard file descriptors
          sys.stdout.flush()
          sys.stderr.flush()
@@ -53,7 +89,20 @@
          os.dup2(si.fileno(), sys.stdin.fileno())
          os.dup2(so.fileno(), sys.stdout.fileno())
          os.dup2(se.fileno(), sys.stderr.fileno())
-@@ -102,9 +100,8 @@ class QuerierDaemon:
+-    
++
+         # write pidfile
+         atexit.register(self.delpid)
+         pid = str(os.getpid())
+-        file(self.pidfile,'w+').write("%s\n" % pid)
+-    
++        with open(self.pidfile,'w+') as f:
++          f.write(pid + '\n')
++
+     def delpid(self):
+         os.remove(self.pidfile)
+ 
+@@ -102,52 +101,50 @@ class QuerierDaemon:
          """
          # Check for a pidfile to see if the daemon is already running
          try:
@@ -61,11 +110,26 @@
 -            pid = int(pf.read().strip())
 -            pf.close()
 +            with open(self.pidfile,'r') as pf:
-+                pid = int(pf.read().strip())
++              pid = int(pf.read().strip())
          except IOError:
              pid = None
-     
-@@ -124,9 +121,8 @@ class QuerierDaemon:
+-    
++
+         if pid:
+             message = ("The file %s exists.\n"
+                        "Is querierd already running?\n")
+             sys.stderr.write(message % self.pidfile)
+             sys.exit(1)
+-        
++
+         # Start the daemon
+         self.daemonize()
+         self.run()
+-        
++
+     def stop(self):
+         """
+         Stop the daemon
          """
          # Get the pid from the pidfile
          try:
@@ -73,11 +137,20 @@
 -            pid = int(pf.read().strip())
 -            pf.close()
 +            with open(self.pidfile,'r') as pf:
-+                pid = int(pf.read().strip())
++              pid = int(pf.read().strip())
          except IOError:
              pid = None
-     
-@@ -141,13 +137,13 @@ class QuerierDaemon:
+-    
++
+         if not pid:
+             message = ("The pidfile %s does not exist."
+                        "Was the querierd already stopped?\n")
+             sys.stderr.write(message % self.pidfile)
+             return # not an error in a restart
+ 
+-        # Try killing the daemon process    
++        # Try killing the daemon process
+         try:
              while 1:
                  os.kill(pid, SIGTERM)
                  time.sleep(0.1)
@@ -95,7 +168,7 @@
                  sys.exit(1)
  
      def restart(self):
-@@ -161,12 +157,12 @@ class QuerierDaemon:
+@@ -161,14 +158,14 @@ class QuerierDaemon:
          """
          Create a Querier and let it run.
          """
@@ -108,10 +181,17 @@
 -        print 'The querierd daemon must be controlled by root.'
 +        print('The querierd daemon must be controlled by root.')
          sys.exit(1)
-                 
+-                
++
      config = ConfigParser()
-@@ -184,18 +180,18 @@ if __name__ == "__main__":
-     
+     config.read(config_file)
+     pidfile = config.get('querierd', 'pidfile')
+@@ -181,21 +178,20 @@ if __name__ == "__main__":
+             'Interface %s not found. Please check %s .'%(interface, config_file)
+         )
+     daemon = QuerierDaemon(query_interval, ip, pidfile)
+-    
++
      if len(sys.argv) == 2:
          if 'start' == sys.argv[1]:
 -            print 'Querier daemon starting at %s.'%ip
@@ -132,4 +212,101 @@
 -        print "usage: %s start|stop|restart" % sys.argv[0]
 +        print("usage: %s start|stop|restart" % sys.argv[0])
          sys.exit(2)
+-
+--- a/querier/__init__.py
++++ b/querier/__init__.py
+@@ -50,7 +50,7 @@ class Querier:
+         def sigterm_handler(signal, frame):
+             self.stop = True
+         signal.signal(signal.SIGTERM, sigterm_handler)
+-        
++
+     def build_query_packet(self):
+         igmp = IGMPv3Packet()
+         igmp.type = 'query'
+@@ -62,7 +62,7 @@ class Querier:
+         ip.src = self.source_address
+         ip.dst = all_routers
+         ip.data = igmp.bytes()
+-    
++
+     def run(self):
+         syslog.syslog('Querier starting.')
+         self.listener = QueryListener(self.source_address)
+@@ -107,7 +107,7 @@ class QueryListener:
  
+     def _ip_as_int(self, address):
+         return struct.unpack("!I", socket.inet_aton(address))[0]
+-        
++
+     def listen(self):
+         while True:
+             data, address = self.socket.recvfrom(65565)
+@@ -120,7 +120,7 @@ class QueryListener:
+                         self.lock.release()
+             except IndexError:
+                 pass
+-    
++
+     def elapsed(self):
+         """
+         Return the time elapsed since receiving a query from a
+--- a/querier/packets.py
++++ b/querier/packets.py
+@@ -51,7 +51,7 @@ class Packet(object):
+ 
+     def header(self):
+         values = [getattr(self, field) for field in self.fields]
+-        return struct.pack(self.format, *values)
++        return struct.pack(self.format, *values).decode('latin_1')
+ 
+     def compute_checksum(self):
+         self.checksum = 0
+@@ -70,7 +70,7 @@ class Packet(object):
+     def data(self, new_data):
+         self._data = new_data
+         self.length = LENGTH(self.hdr_length + len(new_data))
+-        
++
+ 
+ class IGMPv2Packet(Packet):
+     fields = ['_type', '_max_response_time', 'checksum', '_group']
+@@ -101,7 +101,7 @@ class IGMPv2Packet(Packet):
+         return self._dst
+     @group.setter
+     def group(self, addr):
+-        self._group = struct.unpack("!I", socket.inet_aton(addr))[0]  
++        self._group = struct.unpack("!I", socket.inet_aton(addr))[0]
+ 
+ class IGMPv3Packet(IGMPv2Packet):
+     fields = ['_type', '_max_response_time', 'checksum', '_group', '_v3_info']
+@@ -124,7 +124,7 @@ class IPv4Packet(Packet):
+     _id = 0
+     flags_offset = 0
+     _ttl = 64
+-    _protocol = 0 
++    _protocol = 0
+     checksum = 0
+     _src = 0
+     _dst = 0
+@@ -156,11 +156,11 @@ class IPv4Packet(Packet):
+         return self._src
+     @protocol.setter
+     def src(self, addr):
+-        self._src = struct.unpack("!I", socket.inet_aton(addr))[0]  
++        self._src = struct.unpack("!I", socket.inet_aton(addr))[0]
+ 
+     @property
+     def dst(self):
+         return self._dst
+     @protocol.setter
+     def dst(self, addr):
+-        self._dst = struct.unpack("!I", socket.inet_aton(addr))[0]  
++        self._dst = struct.unpack("!I", socket.inet_aton(addr))[0]
+--- a/querier/service.py
++++ b/querier/service.py
+@@ -43,4 +43,3 @@ def main():
+ 
+ if __name__ == "__main__":
+     main()
+-
