@@ -34,18 +34,18 @@ PKG_USE_MIPS16:=0
 PYTHON3_PKG_BUILD:=0
 
 include $(INCLUDE_DIR)/package.mk
-#include ../../packages/devel/ninja/ninja-cmake.mk
 include $(INCLUDE_DIR)/cmake.mk
+#include ../../lang/python/python3-package.mk
 include ../../packages/lang/python/python3-package.mk
 
 CMAKE_OPTIONS += \
-	-DENABLEEXAMPLES=0 \
 	-DBUILDSWIGNODE=$(if $(CONFIG_PACKAGE_libmraa-node),ON,OFF) \
 	-DSWIG_EXECUTABLE=$(STAGING_DIR_HOSTPKG)/bin/swig \
 	-DV8_ROOT_DIR=$(STAGING_DIR_HOSTPKG)/include/node \
 	-DNODE_ROOT_DIR=$(STAGING_DIR_HOSTPKG)/include/node \
 	-DPYTHON2LIBS_FOUND=FALSE \
 	-DPYTHON2INTERP_FOUND=FALSE \
+	-DENABLEEXAMPLES=OFF \
 	-DBUILDTESTS=OFF \
 	-DFIRMATA=ON
 
