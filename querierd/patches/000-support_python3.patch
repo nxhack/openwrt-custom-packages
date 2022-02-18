@@ -7,3 +7,85 @@
 +interface=br-lan
  # The next item is ignored by the upstart script
  pidfile=/var/run/querierd.pid
+--- ./querier/daemon.py
++++ ./querier/daemon.py
+@@ -57,9 +57,8 @@ class QuerierDaemon:
+             if pid > 0:
+                 # exit first parent
+                 sys.exit(0) 
+-        except OSError, e: 
+-            sys.stderr.write("fork #1 failed: %d (%s)\n" %
+-                             (e.errno, e.strerror))
++        except OSError as err:
++            sys.stderr.write('fork #1 failed: {0}\n'.format(err))
+             sys.exit(1)
+     
+         # decouple from parent environment
+@@ -73,9 +72,8 @@ class QuerierDaemon:
+             if pid > 0:
+                 # exit from second parent
+                 sys.exit(0) 
+-        except OSError, e: 
+-            sys.stderr.write("fork #2 failed: %d (%s)\n" %
+-                             (e.errno, e.strerror))
++        except OSError as err:
++            sys.stderr.write('fork #2 failed: {0}\n'.format(err))
+             sys.exit(1) 
+     
+         # redirect standard file descriptors
+@@ -141,13 +139,13 @@ class QuerierDaemon:
+             while 1:
+                 os.kill(pid, SIGTERM)
+                 time.sleep(0.1)
+-        except OSError, err:
+-            err = str(err)
+-            if err.find("No such process") > 0:
++        except OSError as err:
++            e = str(err.args)
++            if e.find("No such process") > 0:
+                 if os.path.exists(self.pidfile):
+                     os.remove(self.pidfile)
+             else:
+-                print str(err)
++                print(str(err.args))
+                 sys.exit(1)
+ 
+     def restart(self):
+@@ -161,12 +159,12 @@ class QuerierDaemon:
+         """
+         Create a Querier and let it run.
+         """
+-        print 'querier service starting. Using address %s'%ip
++        print('querier service starting. Using address %s'%ip)
+         Querier(self.source_address, self.interval).run()
+ 
+ if __name__ == "__main__":
+     if os.getuid() != 0:
+-        print 'The querierd daemon must be controlled by root.'
++        print('The querierd daemon must be controlled by root.')
+         sys.exit(1)
+                 
+     config = ConfigParser()
+@@ -184,18 +182,18 @@ if __name__ == "__main__":
+     
+     if len(sys.argv) == 2:
+         if 'start' == sys.argv[1]:
+-            print 'Querier daemon starting at %s.'%ip
++            print('Querier daemon starting at %s.'%ip)
+             daemon.start()
+         elif 'stop' == sys.argv[1]:
+-            print 'querierd stopping.'
++            print('querierd stopping.')
+             daemon.stop()
+         elif 'restart' == sys.argv[1]:
+             daemon.restart()
+         else:
+-            print "Unknown command"
++            print("Unknown command")
+             sys.exit(2)
+         sys.exit(0)
+     else:
+-        print "usage: %s start|stop|restart" % sys.argv[0]
++        print("usage: %s start|stop|restart" % sys.argv[0])
+         sys.exit(2)
+ 
