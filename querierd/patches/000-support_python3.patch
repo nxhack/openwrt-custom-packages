@@ -7,8 +7,8 @@
 +interface=br-lan
  # The next item is ignored by the upstart script
  pidfile=/var/run/querierd.pid
---- a/querier/daemon.py
-+++ b/querier/daemon.py
+--- a/querier/daemon.py	2017-06-27 10:38:07.000000000 +0900
++++ b/querier/daemon.py	2019-12-06 12:46:09.933105210 +0900
 @@ -23,7 +23,7 @@
  
  import sys, os, time, atexit, netifaces
@@ -30,7 +30,7 @@
              sys.exit(1)
      
          # decouple from parent environment
-@@ -73,9 +72,8 @@ class QuerierDaemon:
+@@ -73,17 +72,16 @@ class QuerierDaemon:
              if pid > 0:
                  # exit from second parent
                  sys.exit(0) 
@@ -42,7 +42,42 @@
              sys.exit(1) 
      
          # redirect standard file descriptors
-@@ -141,13 +139,13 @@ class QuerierDaemon:
+         sys.stdout.flush()
+         sys.stderr.flush()
+-        si = file(self.stdin, 'r')
+-        so = file(self.stdout, 'a+')
+-        se = file(self.stderr, 'a+', 0)
++        si = open(self.stdin, 'r')
++        so = open(self.stdout, 'a+')
++        se = open(self.stderr, 'a+')
+         os.dup2(si.fileno(), sys.stdin.fileno())
+         os.dup2(so.fileno(), sys.stdout.fileno())
+         os.dup2(se.fileno(), sys.stderr.fileno())
+@@ -102,9 +100,8 @@ class QuerierDaemon:
+         """
+         # Check for a pidfile to see if the daemon is already running
+         try:
+-            pf = file(self.pidfile,'r')
+-            pid = int(pf.read().strip())
+-            pf.close()
++            with open(self.pidfile,'r') as pf:
++                pid = int(pf.read().strip())
+         except IOError:
+             pid = None
+     
+@@ -124,9 +121,8 @@ class QuerierDaemon:
+         """
+         # Get the pid from the pidfile
+         try:
+-            pf = file(self.pidfile,'r')
+-            pid = int(pf.read().strip())
+-            pf.close()
++            with open(self.pidfile,'r') as pf:
++                pid = int(pf.read().strip())
+         except IOError:
+             pid = None
+     
+@@ -141,13 +137,13 @@ class QuerierDaemon:
              while 1:
                  os.kill(pid, SIGTERM)
                  time.sleep(0.1)
@@ -60,7 +95,7 @@
                  sys.exit(1)
  
      def restart(self):
-@@ -161,12 +159,12 @@ class QuerierDaemon:
+@@ -161,12 +157,12 @@ class QuerierDaemon:
          """
          Create a Querier and let it run.
          """
@@ -75,7 +110,7 @@
          sys.exit(1)
                  
      config = ConfigParser()
-@@ -184,18 +182,18 @@ if __name__ == "__main__":
+@@ -184,18 +180,18 @@ if __name__ == "__main__":
      
      if len(sys.argv) == 2:
          if 'start' == sys.argv[1]:
