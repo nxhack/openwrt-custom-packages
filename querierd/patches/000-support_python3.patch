@@ -14,7 +14,7 @@
  import sys, os, time, atexit, netifaces
  from signal import SIGTERM 
 -from ConfigParser import ConfigParser
-+from configParser import ConfigParser
++from configparser import ConfigParser
  from . import Querier
  
  config_file = '/etc/querierd'
