@@ -7,8 +7,8 @@
 +interface=br-lan
  # The next item is ignored by the upstart script
  pidfile=/var/run/querierd.pid
---- ./querier/daemon.py
-+++ ./querier/daemon.py
+--- a/querier/daemon.py
++++ b/querier/daemon.py
 @@ -23,7 +23,7 @@
  
  import sys, os, time, atexit, netifaces
