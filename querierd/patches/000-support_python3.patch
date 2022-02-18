@@ -253,15 +253,6 @@
          Return the time elapsed since receiving a query from a
 --- a/querier/packets.py
 +++ b/querier/packets.py
-@@ -51,7 +51,7 @@ class Packet(object):
- 
-     def header(self):
-         values = [getattr(self, field) for field in self.fields]
--        return struct.pack(self.format, *values)
-+        return struct.pack(self.format, *values).decode('latin_1')
- 
-     def compute_checksum(self):
-         self.checksum = 0
 @@ -70,7 +70,7 @@ class Packet(object):
      def data(self, new_data):
          self._data = new_data
