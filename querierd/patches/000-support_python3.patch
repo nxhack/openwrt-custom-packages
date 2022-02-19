@@ -262,7 +262,7 @@
  
  class IGMPv2Packet(Packet):
      fields = ['_type', '_max_response_time', 'checksum', '_group']
-@@ -101,7 +101,7 @@ class IGMPv2Packet(Packet):
+@@ -101,14 +101,14 @@ class IGMPv2Packet(Packet):
          return self._dst
      @group.setter
      def group(self, addr):
@@ -271,6 +271,14 @@
  
  class IGMPv3Packet(IGMPv2Packet):
      fields = ['_type', '_max_response_time', 'checksum', '_group', '_v3_info']
+     formats = {'_type':'B', '_max_response_time':'B', 'checksum':'H',
+                '_group':'I', '_v3_info':'I'}
+     _v3_info = 0x00
+-    
++
+ class IPv4Packet(Packet):
+     """
+     An IP v4 packet with the Router Alert option.
 @@ -124,7 +124,7 @@ class IPv4Packet(Packet):
      _id = 0
      flags_offset = 0
