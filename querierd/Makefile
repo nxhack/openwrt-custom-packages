@@ -37,6 +37,10 @@ so you can run querierd daemons on several devices on your network,
 some of which may not be running all the time.
 endef
 
+define Package/querierd/conffiles
+/etc/querierd
+endef
+
 define Package/querierd/install
 	$(INSTALL_DIR) $(1)$(PYTHON3_PKG_DIR)
 	$(INSTALL_DIR) $(1)/etc/init.d
