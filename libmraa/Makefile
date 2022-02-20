@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libmraa
 PKG_VERSION:=2.2.0
-PKG_RELEASE:=5
+PKG_RELEASE:=6
 
 #PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 #PKG_SOURCE_URL:=https://codeload.github.com/eclipse/mraa/tar.gz/v$(PKG_VERSION)?
@@ -19,9 +19,9 @@ PKG_RELEASE:=5
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/eclipse/mraa.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=833bac569c5fae2905fd6f6abc90c86c784b904c
+PKG_SOURCE_VERSION:=d7ae17171bd733291aca70f910a0c2618fa4fe1a
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_MIRROR_HASH:=a63e03a1b4c96c54ad0bd5f4ae627b2c288ca645045a671faa6ea049c8180a40
+PKG_MIRROR_HASH:=5204350508e47aa3d444c5dd5461e14f344a4fed6205831eacdc2b62805541eb
 
 PKG_MAINTAINER:=John Crispin <blogic@openwrt.org>, Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT
