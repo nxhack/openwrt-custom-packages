@@ -40,6 +40,12 @@ define Package/querierd/conffiles
 /etc/querierd
 endef
 
+define Build/Compile
+	$(call Build/Compile/Py3Mod,., \
+		install --prefix="/usr" --root="$(PKG_INSTALL_DIR)", \
+	)
+endef
+
 define Package/querierd/install
 	$(INSTALL_DIR) $(1)$(PYTHON3_PKG_DIR)
 	$(INSTALL_DIR) $(1)/etc/init.d
