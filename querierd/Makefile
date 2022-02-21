@@ -19,9 +19,9 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
-include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
+include ../../feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
-include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
+include ../../feeds/packages/lang/python/python3-package.mk
 
 define Package/querierd
   SECTION:=net
@@ -39,6 +39,13 @@ endef
 
 define Package/querierd/conffiles
 /etc/querierd
+endef
+
+define Build/Prepare
+	$(PKG_UNPACK)
+	(cd $(BUILD_DIR) && mv $(PKG_SOURCE_SUBDIR)/* $(PKG_BUILD_DIR)/ && \
+	mv $(PKG_SOURCE_SUBDIR)/.??* $(PKG_BUILD_DIR)/ && rmdir $(PKG_SOURCE_SUBDIR))
+	$(Build/Patch)
 endef
 
 define Package/querierd/install
