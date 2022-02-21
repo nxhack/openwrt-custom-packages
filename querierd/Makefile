@@ -41,13 +41,6 @@ define Package/querierd/conffiles
 /etc/querierd
 endef
 
-define Build/Prepare
-	$(PKG_UNPACK)
-	(cd $(BUILD_DIR) && mv $(PKG_SOURCE_SUBDIR)/* $(PKG_BUILD_DIR)/ && \
-	mv $(PKG_SOURCE_SUBDIR)/.??* $(PKG_BUILD_DIR)/ && rmdir $(PKG_SOURCE_SUBDIR))
-	$(Build/Patch)
-endef
-
 define Package/querierd/install
 	$(INSTALL_DIR) $(1)$(PYTHON3_PKG_DIR)
 	$(INSTALL_DIR) $(1)/etc/init.d
@@ -57,4 +50,6 @@ define Package/querierd/install
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
 endef
 
+$(eval $(call Py3Package,querierd))
 $(eval $(call BuildPackage,querierd))
+$(eval $(call BuildPackage,querierd-src))
