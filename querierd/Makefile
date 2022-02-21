@@ -19,7 +19,6 @@ PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
-include ../../packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
 include ../../packages/lang/python/python3-package.mk
 
@@ -50,6 +49,4 @@ define Package/querierd/install
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/querierd $(1)/etc/
 endef
 
-$(eval $(call Py3Package,querierd))
 $(eval $(call BuildPackage,querierd))
-$(eval $(call BuildPackage,querierd-src))
