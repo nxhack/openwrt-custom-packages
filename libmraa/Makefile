@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libmraa
 PKG_VERSION:=2.2.0
-PKG_RELEASE:=6
+PKG_RELEASE:=7
 
 #PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 #PKG_SOURCE_URL:=https://codeload.github.com/eclipse/mraa/tar.gz/v$(PKG_VERSION)?
@@ -80,7 +80,7 @@ endef
 define Package/libmraa-node
   $(call Package/libmraa/Default)
   TITLE:=Eclipse MRAA lowlevel IO Node.js library
-  DEPENDS:=+libmraa +PACKAGE_node:node
+  DEPENDS:=+libmraa +PACKAGE_node:node +libuv
 endef
 
 define Package/libmraa-node/description
