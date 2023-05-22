@@ -2,7 +2,7 @@
 
 ## Description
 
-OpenWrt Custom Packages : for Head (Development branch)
+OpenWrt Custom Packages : for OpenWrt-23.05
 
 Note: support arches are aarch64, arm, x86_64
 
@@ -12,7 +12,7 @@ If you want to replace the OpenWrt community packages, follow the steps below.
 
 Add the following line to feeds.conf or feeds.conf.default.
 ```
-src-git custom https://github.com/nxhack/openwrt-custom-packages.git
+src-git custom https://github.com/nxhack/openwrt-custom-packages.git;openwrt-23.05
 ```
 
 Run
