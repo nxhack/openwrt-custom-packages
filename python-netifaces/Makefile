@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-netifaces
 PKG_VERSION:=0.11.0
-PKG_RELEASE:=2
+PKG_RELEASE:=3
 
 PYPI_NAME:=netifaces
 PKG_HASH:=043a79146eb2907edf439899f262b3dfe41717d34124298ed281139a8b93ca32
@@ -17,8 +17,6 @@ PKG_HASH:=043a79146eb2907edf439899f262b3dfe41717d34124298ed281139a8b93ca32
 PKG_MAINTAINER:=Josef Schlehofer <pepe.schlehofer@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
-
-PKG_BUILD_DEPENDS:=python-setuptools/host
 
 include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
