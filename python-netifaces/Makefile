@@ -37,7 +37,7 @@ define Package/python3-netifaces/description
   Portable network interface information.
 endef
 
-TARGET_CFLAGS+="-Wno-error=int-conversion"
+TARGET_CFLAGS+="$(TARGET_CPPFLAGS) -Wno-error=int-conversion"
 
 $(eval $(call Py3Package,python3-netifaces))
 $(eval $(call BuildPackage,python3-netifaces))
